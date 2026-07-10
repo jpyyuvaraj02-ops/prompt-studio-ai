@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Studio AI - Platform Configurations</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="/admin/css/admin.css" />
+    <link rel="stylesheet" href="/admin/css/responsive.css" />
+  </head>
+  <body>
+
+    <!-- Sidebar injection target -->
+    <div id="admin-sidebar-target"></div>
+
+    <!-- Main Content Panel -->
+    <div class="admin-main-wrapper">
+      
+      <!-- Header target -->
+      <div id="admin-header-target" data-title="System Settings"></div>
+
+      <!-- Settings Panel Form -->
+      <div class="premium-card p-4 animate-fade-in" style="max-width: 720px;">
+        <h5 class="fw-bold text-dark mb-4"><i class="bi bi-sliders text-primary me-2"></i>Global Engine Configurations</h5>
+        
+        <form id="settings-form" onsubmit="event.preventDefault(); saveGlobalSettings();">
+          <!-- Maintenance mode & registrations -->
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-sm-6">
+              <div class="p-3 border rounded-4 bg-light">
+                <div class="form-check form-switch text-start">
+                  <input class="form-check-input" type="checkbox" id="settings-maintenance" />
+                  <label class="form-check-label fw-bold text-dark fs-8" for="settings-maintenance">🛠️ Maintenance Mode</label>
+                  <p class="text-muted fs-9 mb-0 leading-normal mt-1" style="font-size: 11.5px;">Redirect non-admin visitors to a static maintenance placeholder card.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6">
+              <div class="p-3 border rounded-4 bg-light">
+                <div class="form-check form-switch text-start">
+                  <input class="form-check-input" type="checkbox" id="settings-registrations" />
+                  <label class="form-check-label fw-bold text-dark fs-8" for="settings-registrations">👤 Open Registrations</label>
+                  <p class="text-muted fs-9 mb-0 leading-normal mt-1" style="font-size: 11.5px;">Allow visitors to register new accounts on the main platform.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guest mode restrictions toggle -->
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-sm-6">
+              <div class="p-3 border rounded-4 bg-light">
+                <div class="form-check form-switch text-start">
+                  <input class="form-check-input" type="checkbox" id="settings-guest-mode" />
+                  <label class="form-check-label fw-bold text-dark fs-8" for="settings-guest-mode">🔒 Guest Browse Restrictions</label>
+                  <p class="text-muted fs-9 mb-0 leading-normal mt-1" style="font-size: 11.5px;">Enforce guest mode constraints and top banners on community views.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6">
+              <div class="p-3 border rounded-4 bg-light">
+                <div class="form-check form-switch text-start">
+                  <input class="form-check-input" type="checkbox" id="settings-debug" />
+                  <label class="form-check-label fw-bold text-dark fs-8" for="settings-debug">🐞 Debug Log Echoes</label>
+                  <p class="text-muted fs-9 mb-0 leading-normal mt-1" style="font-size: 11.5px;">Print system level exceptions inside client browser logs.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Numeric rates -->
+          <div class="row g-3 mb-4 border-top pt-4">
+            <h6 class="fw-bold text-dark mb-1 fs-8">Platform Processing Rates</h6>
+            <div class="col-12 col-sm-6">
+              <label class="form-label fs-9 fw-bold text-muted text-uppercase">Marketplace Fee Charge (%)</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light">%</span>
+                <input type="number" step="0.1" min="0" max="90" class="form-control rounded-3 fs-8" id="settings-market-fee" required />
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6">
+              <label class="form-label fs-9 fw-bold text-muted text-uppercase">Minimum Payout Balance ($)</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light">$</span>
+                <input type="number" step="5" min="10" max="1000" class="form-control rounded-3 fs-8" id="settings-min-payout" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Backup frequency -->
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-sm-6">
+              <label class="form-label fs-9 fw-bold text-muted text-uppercase">Automatic Cloud Backup Frequency</label>
+              <select class="form-select rounded-3 fs-8" id="settings-backup-freq">
+                <option value="Daily">Daily backups</option>
+                <option value="Weekly">Weekly backups</option>
+                <option value="Monthly">Monthly backups</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Submit settings -->
+          <button type="submit" class="btn btn-primary rounded-pill px-4 fs-8 fw-bold hover-scale mt-3 shadow">
+            <i class="bi bi-shield-check-fill me-1.5"></i>Save System Configurations
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Admin Scripts -->
+    <script src="/admin/js/storage.js" type="module"></script>
+    <script src="/admin/js/admin.js" type="module"></script>
+
+    <script>
+      function loadGlobalSettings() {
+        const settings = StorageHelper.get('ps_global_settings');
+
+        document.getElementById('settings-maintenance').checked = settings.maintenanceMode || false;
+        document.getElementById('settings-registrations').checked = settings.openRegistrations !== false;
+        document.getElementById('settings-guest-mode').checked = settings.guestBrowseRestrictions !== false;
+        document.getElementById('settings-debug').checked = settings.debugEchoes || false;
+
+        document.getElementById('settings-market-fee').value = settings.marketplaceFee || 15.0;
+        document.getElementById('settings-min-payout').value = settings.minPayoutBalance || 50.0;
+        document.getElementById('settings-backup-freq').value = settings.backupFrequency || "Daily";
+      }
+
+      window.saveGlobalSettings = function() {
+        const maintenance = document.getElementById('settings-maintenance').checked;
+        const registrations = document.getElementById('settings-registrations').checked;
+        const guestMode = document.getElementById('settings-guest-mode').checked;
+        const debug = document.getElementById('settings-debug').checked;
+
+        const marketFee = parseFloat(document.getElementById('settings-market-fee').value) || 15.0;
+        const minPayout = parseFloat(document.getElementById('settings-min-payout').value) || 50.0;
+        const backupFreq = document.getElementById('settings-backup-freq').value;
+
+        const updatedSettings = {
+          maintenanceMode: maintenance,
+          openRegistrations: registrations,
+          guestBrowseRestrictions: guestMode,
+          debugEchoes: debug,
+          marketplaceFee: marketFee,
+          minPayoutBalance: minPayout,
+          backupFrequency: backupFreq
+        };
+
+        StorageHelper.set('ps_global_settings', updatedSettings);
+
+        StorageHelper.addLog("admin@promptstudio.ai", "Updated Settings", "Settings", "Success", "Modified global server configuration options.");
+        StorageHelper.addNotification("Global engine parameters modified successfully", "Settings");
+
+        alert("Global configurations saved successfully!");
+      };
+
+      document.addEventListener('DOMContentLoaded', loadGlobalSettings);
+    </script>
+  </body>
+</html>

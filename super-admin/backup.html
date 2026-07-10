@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Studio AI - Master Database Snapshots</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="/super-admin/css/super-admin.css" />
+    <link rel="stylesheet" href="/super-admin/css/responsive.css" />
+  </head>
+  <body style="background-color: #030712; color: #f3f4f6;">
+
+    <!-- Sidebar injection target -->
+    <div id="super-sidebar-target"></div>
+
+    <!-- Main Content Panel -->
+    <div class="super-main-wrapper">
+      
+      <!-- Header target -->
+      <div id="super-header-target" data-title="System Backup & Restore"></div>
+
+      <div class="row g-4 animate-fade-in">
+        <!-- Snapshot download/upload -->
+        <div class="col-12 col-md-6">
+          <div class="premium-card bg-dark border-secondary p-4 h-100">
+            <h5 class="fw-bold text-white mb-3"><i class="bi bi-cloud-arrow-down-fill text-violet me-2"></i>Create System Snapshot</h5>
+            <p class="text-white-50 fs-8 leading-relaxed mb-4">Export the entirety of Prompt Studio AI client-side state (including custom users, community prompts, catalog lists, and diagnostic logs) as a single combined encrypted JSON bundle.</p>
+            
+            <button class="btn btn-primary rounded-pill px-4 fs-8 fw-semibold" style="background-color: #7c3aed; border-color: #7c3aed;" onclick="downloadLocalSnapshot()">
+              <i class="bi bi-file-earmark-arrow-down me-1.5"></i>Generate & Download Backup JSON
+            </button>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="premium-card bg-dark border-secondary p-4 h-100">
+            <h5 class="fw-bold text-white mb-3"><i class="bi bi-cloud-arrow-up-fill text-violet me-2"></i>Restore System Snapshot</h5>
+            <p class="text-white-50 fs-8 leading-relaxed mb-4">Restore or migrate system states by uploading a valid combined JSON snapshot bundle. <b>Warning:</b> This override operation will replace all active tables instantly.</p>
+            
+            <!-- Hidden file inputs -->
+            <input type="file" id="snapshot-upload-file" class="d-none" accept=".json" onchange="uploadLocalSnapshot(event)" />
+
+            <button class="btn btn-outline-danger rounded-pill px-4 fs-8 fw-semibold border-secondary text-white" onclick="triggerSnapshotUpload()">
+              <i class="bi bi-file-earmark-arrow-up me-1.5"></i>Upload & Restore Backup JSON
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Super Admin Scripts -->
+    <script src="/admin/js/storage.js" type="module"></script>
+    <script src="/super-admin/js/dashboard.js" type="module"></script>
+
+    <script>
+      window.downloadLocalSnapshot = function() {
+        const payload = {
+          ps_users_list: StorageHelper.get('ps_users_list'),
+          ps_community: StorageHelper.get('ps_community'),
+          ps_marketplace: StorageHelper.get('ps_marketplace'),
+          ps_skills: StorageHelper.get('ps_skills'),
+          ps_audit_logs: StorageHelper.get('ps_audit_logs'),
+          ps_announcements: StorageHelper.get('ps_announcements'),
+          ps_global_settings: StorageHelper.get('ps_global_settings'),
+          ps_admins_list: StorageHelper.get('ps_admins_list'),
+          exportedAt: new Date().toISOString()
+        };
+
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", `promptstudio_full_snapshot_${Date.now()}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+
+        StorageHelper.addLog("super@promptstudio.ai", "Exported System Snapshot", "Security", "Success", "Successfully generated and downloaded full local storage system snapshot JSON.");
+      };
+
+      window.triggerSnapshotUpload = function() {
+        if (confirm("Restore Snapshot: This will overwrite all active users, community, marketplace, logs, and settings tables with those in the uploaded file. Do you wish to proceed?")) {
+          document.getElementById('snapshot-upload-file').click();
+        }
+      };
+
+      window.uploadLocalSnapshot = function(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            const parsed = JSON.parse(e.target.result);
+            
+            // Basic validity check
+            if (!parsed.ps_users_list || !parsed.ps_community || !parsed.ps_marketplace) {
+              throw new Error("Invalid schema structure. Missing required database namespaces.");
+            }
+
+            // Restore all keys
+            Object.keys(parsed).forEach(key => {
+              if (key !== 'exportedAt') {
+                localStorage.setItem(key, JSON.stringify(parsed[key]));
+              }
+            });
+
+            // Write logs
+            StorageHelper.addLog("super@promptstudio.ai", "Restored System Snapshot", "Security", "Success", `Successfully uploaded and synchronized a system snapshot file dated: ${parsed.exportedAt || 'Unknown'}`);
+
+            alert("System restore completed successfully! Overwriting tables and reloading console dashboard.");
+            window.location.href = './dashboard.html';
+
+          } catch (err) {
+            alert("Error: Invalid snap file. " + err.message);
+          }
+        };
+        reader.readAsText(file);
+      };
+    </script>
+  </body>
+</html>

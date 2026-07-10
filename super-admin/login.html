@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Studio AI - Super Admin Console</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Super Admin style -->
+    <link rel="stylesheet" href="/super-admin/css/super-admin.css" />
+    <style>
+      body {
+        background: radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.15) 0%, rgba(3, 7, 18, 1) 100%);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f3f4f6;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+          
+          <div class="text-center mb-4">
+            <a href="/" class="text-decoration-none text-white-50 fs-8 fw-semibold hover-text-primary">
+              <i class="bi bi-arrow-left me-1"></i>Back to Main Site
+            </a>
+          </div>
+
+          <!-- Glass Dark Card -->
+          <div class="premium-card p-4 shadow-lg text-center" style="border-radius: 24px; background-color: rgba(17, 24, 39, 0.85); border: 1px solid #374151;">
+            <!-- Shield Logo Section -->
+            <div class="d-inline-flex align-items-center justify-content-center text-white rounded-4 shadow mb-3" style="width: 52px; height: 52px; background-color: #7c3aed;">
+              <i class="bi bi-shield-lock-fill fs-3"></i>
+            </div>
+            
+            <h3 class="fw-bold text-white mb-1">Super Admin Console</h3>
+            <p class="text-white-50 fs-9 mb-4">Cryptographic authentication required for platform master control.</p>
+
+            <!-- Alert -->
+            <div id="super-login-alert" class="alert alert-danger fs-9 py-2 px-3 d-none rounded-3 text-start bg-danger bg-opacity-20 border-danger text-white" role="alert">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>Access denied.
+            </div>
+
+            <form id="super-login-form">
+              <!-- Email -->
+              <div class="mb-3 text-start">
+                <label for="super-email" class="form-label fs-9 fw-semibold text-white-50 text-uppercase tracking-wider">Super Email</label>
+                <div class="position-relative">
+                  <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-white-50"><i class="bi bi-envelope"></i></span>
+                  <input type="email" class="form-control rounded-3 border-secondary bg-dark text-white ps-5 py-2.5 fs-8" id="super-email" placeholder="super@promptstudio.ai" required />
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="mb-4 text-start">
+                <div class="d-flex justify-content-between">
+                  <label for="super-password" class="form-label fs-9 fw-semibold text-white-50 text-uppercase tracking-wider">Password</label>
+                  <span class="text-violet fs-9 cursor-pointer text-white-50" onclick="togglePasswordVisibility()"><i id="eye-icon" class="bi bi-eye"></i> Show</span>
+                </div>
+                <div class="position-relative">
+                  <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-white-50"><i class="bi bi-lock"></i></span>
+                  <input type="password" class="form-control rounded-3 border-secondary bg-dark text-white ps-5 py-2.5 fs-8" id="super-password" placeholder="••••••••" required />
+                </div>
+              </div>
+
+              <!-- Submit -->
+              <button type="submit" class="btn btn-primary w-100 fw-bold py-2.5 rounded-3 hover-scale mb-3 shadow-sm fs-8" style="background-color: #7c3aed; border-color: #7c3aed;">
+                <span>Root Login</span>
+                <i class="bi bi-shield-check fs-5 ms-1 align-middle"></i>
+              </button>
+            </form>
+
+            <div class="border-top border-secondary pt-3 text-center">
+              <span class="text-white-50 fs-9">Master Key: <b>super@promptstudio.ai</b> / <b>super123</b></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function togglePasswordVisibility() {
+        const pwdInput = document.getElementById('super-password');
+        const eyeIcon = document.getElementById('eye-icon');
+        if (pwdInput.type === 'password') {
+          pwdInput.type = 'text';
+          eyeIcon.className = 'bi bi-eye-slash';
+        } else {
+          pwdInput.type = 'password';
+          eyeIcon.className = 'bi bi-eye';
+        }
+      }
+
+      document.getElementById('super-login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('super-email').value.trim();
+        const password = document.getElementById('super-password').value.trim();
+        const alertBanner = document.getElementById('super-login-alert');
+
+        if (email === 'super@promptstudio.ai' && password === 'super123') {
+          localStorage.setItem('ps_super_admin_logged_in', 'true');
+          
+          // Log Root Authentication
+          const logs = JSON.parse(localStorage.getItem('ps_audit_logs')) || [];
+          logs.unshift({
+            date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+            user: email,
+            action: "Super Admin Login",
+            module: "Security",
+            status: "Success",
+            ip: "192.168.1.10",
+            details: "Logged in successfully to Master Root Console."
+          });
+          localStorage.setItem('ps_audit_logs', JSON.stringify(logs));
+
+          window.location.href = './dashboard.html';
+        } else {
+          alertBanner.classList.remove('d-none');
+          alertBanner.innerText = "Access denied. Try: super@promptstudio.ai / super123";
+        }
+      });
+    </script>
+  </body>
+</html>

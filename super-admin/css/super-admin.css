@@ -1,0 +1,24 @@
+/* =======================================================
+   PROMPT STUDIO - SUPER ADMIN PANEL STYLE SHEET (VIOLET)
+   ======================================================= */
+
+@import url('/admin/css/admin.css');
+
+:root {
+  --admin-sidebar-bg: #030712; /* Extreme dark charcoal */
+  --admin-sidebar-active: #1f2937;
+  --admin-accent: #7c3aed; /* Sovereign Violet */
+  --admin-accent-rgb: 124, 58, 237;
+}
+
+/* Custom super admin banner badge */
+.super-badge {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+}

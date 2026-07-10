@@ -1,0 +1,1252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Studio AI - Premium Engineering Cabinet</title>
+    
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+
+    <!-- ============================================ -->
+    <!-- 1. LANDING & MARKETING SCREEN (OFFLINE MODE) -->
+    <!-- ============================================ -->
+    <div id="landing-view" class="view-section animate-fade-in-up relative overflow-hidden">
+      <!-- Floating Ambient Background Shapes -->
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+      <!-- Sticky Glass Header -->
+      <header class="sticky-top py-3 bg-white bg-opacity-75 border-b border-light glass-panel">
+        <div class="container d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-2.5 cursor-pointer text-decoration-none" id="landing-logo">
+            <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-3 shadow" style="width: 36px; height: 36px;">
+              <i data-lucide="sparkles" class="w-4.5 h-4.5"></i>
+            </div>
+            <span class="fs-6 fw-bold text-dark tracking-tight">Prompt Studio AI</span>
+          </div>
+          
+          <nav class="d-none d-md-flex align-items-center gap-4">
+            <button class="btn btn-link p-0 text-secondary text-decoration-none fw-semibold fs-7" id="landing-nav-comm">Community</button>
+            <button class="btn btn-link p-0 text-secondary text-decoration-none fw-semibold fs-7" id="landing-nav-market">Marketplace</button>
+            <button class="btn btn-link p-0 text-secondary text-decoration-none fw-semibold fs-7" id="landing-nav-skills">Skill Center</button>
+          </nav>
+
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-link text-secondary text-decoration-none fw-bold fs-7 px-3" id="landing-btn-login">Login</button>
+            <button class="btn btn-primary fw-bold fs-7 px-4 py-2 rounded-3 shadow-sm hover-scale" id="landing-btn-signup">Sign Up</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero Main Body -->
+      <main class="container text-center py-5 my-4 my-md-5 relative z-3">
+        <!-- Floating Badge -->
+        <div class="d-inline-flex align-items-center gap-2 px-3 py-1 bg-white border border-light rounded-pill shadow-sm fs-8 text-secondary fw-bold mb-4">
+          <i data-lucide="sparkles" class="text-primary animate-pulse" style="width: 14px; height: 14px;"></i>
+          <span>Orchestrated Spec Sheets & Prompt Assets</span>
+        </div>
+
+        <h1 class="display-4 fw-extrabold text-dark tracking-tight mb-3">
+          Build Better Prompts.<br/>
+          <span class="bg-gradient-to-r text-primary">Build Better Products.</span>
+        </h1>
+        
+        <p class="lead text-secondary max-w-xl mx-auto fs-6 mb-5" style="max-width: 600px;">
+          An AI-powered platform to generate prompts, Skill.md files, Product Reports, Documentation, and complete software development plans.
+        </p>
+
+        <!-- CTAs -->
+        <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 mb-5">
+          <button class="btn btn-primary btn-lg fw-bold fs-6 px-5 py-3 rounded-3 shadow hover-scale d-flex align-items-center gap-2" id="hero-btn-workspace">
+            <span>Create Prompt</span>
+            <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+          </button>
+          <button class="btn btn-white btn-lg border border-secondary border-opacity-25 bg-white text-secondary fw-bold fs-6 px-4 py-3 rounded-3 shadow-sm hover-scale" id="hero-btn-comm">
+            <span>Explore Community</span>
+          </button>
+        </div>
+
+        <!-- Animated Teaser Block -->
+        <div class="pt-4 max-w-4xl mx-auto" style="max-width: 800px;">
+          <div class="p-3 bg-white border border-light rounded-24 shadow-lg relative overflow-hidden">
+            <div class="bg-dark rounded-4 p-4 text-start font-monospace fs-8 text-secondary" style="font-size: 11px;">
+              <p class="text-primary fw-bold mb-1">&gt; Initializing Prompt Studio orchestrator cores...</p>
+              <p class="mb-1 text-white text-opacity-50">&gt; Pre-mounting standard specs: Prompt.md, Skill.md, PRD, README...</p>
+              <p class="text-success mb-0">&gt; Setup completed. Ready to compile your ideas in high-fidelity specifications!</p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="border-top py-5 bg-white mt-5">
+        <div class="container d-flex flex-column flex-sm-row align-items-center justify-content-between gap-4">
+          <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-3" style="width: 28px; height: 28px;">
+              <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
+            </div>
+            <span class="fw-bold fs-7 text-dark">Prompt Studio AI</span>
+          </div>
+
+          <div class="d-flex flex-wrap align-items-center justify-content-center gap-4 fs-8 text-secondary fw-semibold">
+            <button class="btn btn-link p-0 text-secondary text-decoration-none fs-8" id="footer-link-comm">Community</button>
+            <button class="btn btn-link p-0 text-secondary text-decoration-none fs-8" id="footer-link-market">Marketplace</button>
+            <span class="text-muted opacity-25">|</span>
+            <span class="cursor-pointer">Privacy & Terms</span>
+            <span class="cursor-pointer">GitHub Support</span>
+          </div>
+
+          <p class="fs-8 text-muted mb-0">&copy; 2026 Prompt Studio AI. Licensed for local workspace.</p>
+        </div>
+      </footer>
+    </div>
+
+
+    <!-- ============================================ -->
+    <!-- 2. MAIN LOGGED-IN SYSTEM CONTAINER           -->
+    <!-- ============================================ -->
+    <div id="app-workspace-view" class="app-container" style="display: none;">
+      
+      <!-- Mobile Sidebar Burger Icon Bar -->
+      <div class="d-lg-none position-absolute top-0 start-0 p-3 z-3">
+        <button class="btn btn-white border shadow-sm p-2 rounded-3" id="mobile-hamburger-btn">
+          <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
+        </button>
+      </div>
+
+      <!-- Backdrop for mobile drawer sidebar -->
+      <div class="sidebar-mobile-backdrop" id="sidebar-backdrop"></div>
+
+      <!-- Left Sidebar Panel -->
+      <aside class="sidebar-wrapper" id="sidebar-panel">
+        <div class="p-4 d-flex align-items-center justify-content-between border-b border-light">
+          <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-3 shadow-sm" style="width: 32px; height: 32px;">
+              <i data-lucide="sparkles" style="width: 15px; height: 15px;"></i>
+            </div>
+            <span class="fw-bold fs-7 text-dark">Prompt Studio AI</span>
+          </div>
+          <button class="btn btn-link p-0 text-secondary d-lg-none" id="mobile-sidebar-close">
+            <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+          </button>
+        </div>
+
+        <!-- Add Prompt Button -->
+        <div class="px-3 py-2">
+          <button class="btn btn-primary w-100 fw-bold fs-8 py-2.5 rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2" id="sidebar-btn-new">
+            <i data-lucide="plus" style="width: 15px; height: 15px;"></i>
+            <span>New Prompt Spec</span>
+          </button>
+        </div>
+
+        <!-- Sidebar Navigation Buttons -->
+        <nav class="flex-grow-1 px-3 py-2 space-y-1">
+          <button class="sidebar-btn active" data-view="workspace" id="nav-btn-workspace">
+            <i data-lucide="layout" style="width: 16px; height: 16px;"></i>
+            <span>Orchestration Desk</span>
+          </button>
+          
+          <button class="sidebar-btn" data-view="skills" id="nav-btn-skills">
+            <i data-lucide="book-open" style="width: 16px; height: 16px;"></i>
+            <span>Skill Center</span>
+          </button>
+          
+          <button class="sidebar-btn" data-view="community" id="nav-btn-comm">
+            <i data-lucide="users" style="width: 16px; height: 16px;"></i>
+            <span>Community Arena</span>
+          </button>
+
+          <button class="sidebar-btn" data-view="history" id="nav-btn-history">
+            <i data-lucide="history" style="width: 16px; height: 16px;"></i>
+            <span>Saved History</span>
+          </button>
+
+          <button class="sidebar-btn" data-view="downloads" id="nav-btn-downloads">
+            <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+            <span>Downloads Cabinet</span>
+          </button>
+
+          <button class="sidebar-btn" data-view="settings" id="nav-btn-settings">
+            <i data-lucide="settings" style="width: 16px; height: 16px;"></i>
+            <span>Control Settings</span>
+          </button>
+        </nav>
+
+        <!-- User Information (ChatGPT Style Account Dropdown / Popover) -->
+        <div class="sidebar-account-container">
+          <!-- ChatGPT-style Dark Popover Menu -->
+          <div class="chatgpt-account-popover" id="sidebar-account-popover">
+            <!-- User Card -->
+            <button type="button" class="popover-user-card" id="popover-btn-profile">
+              <div class="account-avatar-circle">RT</div>
+              <div class="overflow-hidden flex-grow-1">
+                <div class="popover-user-name text-truncate" id="popover-user-name-display">Rahuman T</div>
+                <div class="popover-user-tier">Free</div>
+              </div>
+              <i data-lucide="chevron-right" class="popover-chevron-right"></i>
+            </button>
+            
+            <div class="popover-divider"></div>
+            
+            <!-- Menu Items -->
+            <button type="button" class="popover-menu-item" id="popover-btn-try-plus">
+              <i data-lucide="sparkles" style="width: 16px; height: 16px;"></i>
+              <span>Try Plus free</span>
+            </button>
+            <button type="button" class="popover-menu-item" id="popover-btn-personalization">
+              <i data-lucide="sliders" style="width: 16px; height: 16px;"></i>
+              <span>Personalization</span>
+            </button>
+            <button type="button" class="popover-menu-item" id="popover-btn-profile-view">
+              <i data-lucide="user" style="width: 16px; height: 16px;"></i>
+              <span>Profile</span>
+            </button>
+            <button type="button" class="popover-menu-item" id="popover-btn-settings">
+              <i data-lucide="settings" style="width: 16px; height: 16px;"></i>
+              <span>Settings</span>
+            </button>
+            
+            <div class="popover-divider"></div>
+            
+            <button type="button" class="popover-menu-item" id="popover-btn-help">
+              <i data-lucide="help-circle" style="width: 16px; height: 16px;"></i>
+              <span>Help</span>
+              <i data-lucide="chevron-right" class="popover-chevron-right"></i>
+            </button>
+            <button type="button" class="popover-menu-item text-danger" id="sidebar-btn-logout">
+              <i data-lucide="log-out" style="width: 16px; height: 16px;" class="text-danger"></i>
+              <span>Log out</span>
+            </button>
+          </div>
+
+          <!-- The main clickable bar button at the bottom of sidebar -->
+          <button type="button" class="sidebar-account-btn" id="sidebar-account-btn">
+            <div class="account-avatar-circle">RT</div>
+            <div class="sidebar-account-info">
+              <div class="sidebar-account-name text-truncate" id="sidebar-user-name">Developer Guest</div>
+              <div class="sidebar-account-tier">Free</div>
+            </div>
+          </button>
+
+          <!-- Hidden elements for backwards compatibility of old js selectors -->
+          <div class="d-none">
+            <span id="sidebar-user-email">guest@promptstudio.io</span>
+            <img src="" id="sidebar-user-avatar" alt="Avatar">
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Canvas View Area -->
+      <main class="main-wrapper" id="main-content-panel">
+        
+        <!-- ============================================ -->
+        <!-- SCREEN: WORKSPACE (DESK)                     -->
+        <!-- ============================================ -->
+        <div id="subview-workspace" class="subview animate-fade-in-up">
+          
+          <!-- STATE A: PROMPT COMPILER FORM & CHAT DESK -->
+          <div id="workspace-form-view" class="claude-chat-layout">
+            <!-- Scrollable Messages Stream -->
+            <div id="workspace-chat-messages" class="claude-messages-area">
+              <!-- Dynamically populated in app.js -->
+            </div>
+
+            <!-- Persistent Claude-inspired Bottom Chat Input wrapper -->
+            <div class="claude-input-wrapper">
+              
+              <!-- Active Indicators Row -->
+              <div class="claude-active-indicator-bar" id="active-indicators-bar">
+                <span id="active-skill-badge" class="claude-indicator-badge d-none">
+                  <i data-lucide="book-open" style="width: 13px; height: 13px;"></i>
+                  <span>Using Skill: <strong id="active-skill-text">Frontend Website</strong></span>
+                  <button type="button" class="claude-indicator-badge-remove" id="btn-remove-skill" title="Remove skill attachment">
+                    <i data-lucide="x" style="width: 12px; height: 12px;"></i>
+                  </button>
+                </span>
+              </div>
+
+              <form id="prompt-generator-form">
+                <div class="claude-input-container">
+
+                  <!-- Invisible/Hidden elements for backwards compatibility of old js listeners -->
+                  <input type="file" id="prompt-file-hidden" class="d-none">
+                  <div class="d-none">
+                    <button type="button" id="btn-input-templates"></button>
+                    <button type="button" id="btn-input-history"></button>
+                    <button type="button" id="prompt-btn-upload"></button>
+                    <button type="button" id="prompt-btn-voice"></button>
+                    <span id="voice-icon"></span>
+                    <span id="voice-text"></span>
+                  </div>
+                  
+                  <!-- Claude @ Suggestion Popup (Hidden by default) -->
+                  <div class="at-suggestion-popup shadow-lg" id="at-suggestion-popup">
+                    <div class="at-suggestion-header border-bottom">Skill Tags Quick-Attach</div>
+                    <button type="button" class="at-suggestion-item" data-tag="Frontend Website">
+                      <i data-lucide="layout" class="text-primary" style="width:14px; height:14px;"></i>
+                      <span>@Frontend Website</span>
+                    </button>
+                    <button type="button" class="at-suggestion-item" data-tag="Landing Page">
+                      <i data-lucide="sparkles" class="text-success" style="width:14px; height:14px;"></i>
+                      <span>@Landing Page</span>
+                    </button>
+                    <button type="button" class="at-suggestion-item" data-tag="JavaScript">
+                      <i data-lucide="code" class="text-warning" style="width:14px; height:14px;"></i>
+                      <span>@JavaScript</span>
+                    </button>
+                    <button type="button" class="at-suggestion-item" data-tag="Bootstrap">
+                      <i data-lucide="grid" class="text-info" style="width:14px; height:14px;"></i>
+                      <span>@Bootstrap</span>
+                    </button>
+                    <button type="button" class="at-suggestion-item" data-tag="Portfolio">
+                      <i data-lucide="user" class="text-danger" style="width:14px; height:14px;"></i>
+                      <span>@Portfolio</span>
+                    </button>
+                    <button type="button" class="at-suggestion-item" data-tag="Coffee Shop">
+                      <i data-lucide="coffee" class="text-secondary" style="width:14px; height:14px;"></i>
+                      <span>@Coffee Shop</span>
+                    </button>
+                    <button type="button" class="at-suggestion-item" data-tag="E-Commerce">
+                      <i data-lucide="shopping-bag" class="text-primary" style="width:14px; height:14px;"></i>
+                      <span>@E-Commerce</span>
+                    </button>
+                  </div>
+
+                  <!-- Textarea Area -->
+                  <textarea class="claude-textarea" id="prompt-text-input" placeholder="Describe what you want to build... (Use @ for Quick-Attach skills)"></textarea>
+
+                  <!-- Bottom Toolbar -->
+                  <div class="claude-bottom-toolbar">
+                    <div class="claude-bottom-left d-flex flex-wrap align-items-center gap-2">
+                      <!-- Model Dropdown -->
+                      <div class="dropdown">
+                        <button class="claude-dropdown-pill dropdown-toggle border" type="button" id="modelDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                          <i data-lucide="sparkles" style="width: 14px; height: 14px;" class="text-primary"></i>
+                          <span id="selected-model-pill-label">Model: GPT-5</span>
+                        </button>
+                        <ul class="dropdown-menu shadow border-light" aria-labelledby="modelDropdownBtn" id="model-dropdown-options">
+                          <li><a class="dropdown-item fw-semibold" href="#" data-model="GPT-5">GPT-5</a></li>
+                          <li><a class="dropdown-item fw-semibold" href="#" data-model="Claude 4">Claude 4</a></li>
+                          <li><a class="dropdown-item fw-semibold" href="#" data-model="Gemini 2.5 Pro">Gemini 2.5 Pro</a></li>
+                          <li><a class="dropdown-item fw-semibold" href="#" data-model="Grok">Grok</a></li>
+                          <li><a class="dropdown-item fw-semibold" href="#" data-model="DeepSeek">DeepSeek</a></li>
+                          <li><a class="dropdown-item fw-semibold" href="#" data-model="Qwen">Qwen</a></li>
+                          <li><a class="dropdown-item fw-semibold" href="#" data-model="Mistral">Mistral</a></li>
+                          <li><a class="dropdown-item" href="#" data-model="Llama 3">Llama 3</a></li>
+                          <li><a class="dropdown-item text-muted" href="#" data-model="Local AI">Local AI</a></li>
+                        </ul>
+                      </div>
+
+                      <!-- Skill Dropdown -->
+                      <div class="dropdown">
+                        <button class="claude-dropdown-pill dropdown-toggle border" type="button" id="skillDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                          <i data-lucide="book-open" style="width: 14px; height: 14px;" class="text-success"></i>
+                          <span id="selected-skill-pill-label">📘 Skill</span>
+                        </button>
+                        <ul class="dropdown-menu shadow border-light" aria-labelledby="skillDropdownBtn" id="skill-dropdown-options" style="max-height: 280px; overflow-y: auto;">
+                          <!-- Built-in & Custom skills lists will be generated dynamically here -->
+                        </ul>
+                      </div>
+
+                      <!-- Clear Chat Button in Bottom Toolbar -->
+                      <button type="button" class="claude-toolbar-btn px-2" id="chat-btn-clear-top" title="Clear Chat">
+                        <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                        <span class="d-none d-sm-inline">Clear Chat</span>
+                      </button>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3">
+                      <button type="submit" class="claude-generate-btn" id="btn-input-generate" title="Generate prompt spec sheets (Ctrl + Enter)">
+                        <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+          <!-- STATE B: OUTPUT RENDER VIEWER -->
+          <div id="workspace-output-view" class="container-fluid max-w-5xl py-2" style="display: none;">
+            <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom pb-3 mb-4 gap-3">
+              <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-light border p-2 rounded-3" id="output-btn-back">
+                  <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+                </button>
+                <div>
+                  <h3 class="fw-bold text-dark mb-0" id="output-project-title">Project Blueprints Spec</h3>
+                  <p class="fs-8 text-secondary mb-0">Compiled output logs by <span class="badge bg-secondary" id="output-badge-model">Gemini</span></p>
+                </div>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button class="btn btn-success fw-bold fs-8 px-4 py-2 rounded-3 shadow-sm d-flex align-items-center gap-2" id="output-btn-download-all">
+                  <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+                  <span>Download Cabinet Package</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Content Panel: Tabs on Left + Document Reader on Right -->
+            <div class="row g-4">
+              <div class="col-lg-3">
+                <div class="d-flex flex-column gap-2" id="output-tabs-container">
+                  <button class="output-tab-btn active text-start" data-tab="promptMd">
+                    <i data-lucide="message-square" style="width: 14px; height: 14px;" class="me-2"></i>Prompt.md
+                  </button>
+                  <button class="output-tab-btn text-start" data-tab="skillMd">
+                    <i data-lucide="book-open" style="width: 14px; height: 14px;" class="me-2"></i>Skill.md
+                  </button>
+                  <button class="output-tab-btn text-start" data-tab="prd">
+                    <i data-lucide="file-text" style="width: 14px; height: 14px;" class="me-2"></i>PRD.md
+                  </button>
+                  <button class="output-tab-btn text-start" data-tab="readme">
+                    <i data-lucide="file-code" style="width: 14px; height: 14px;" class="me-2"></i>README.md
+                  </button>
+                  <button class="output-tab-btn text-start" data-tab="database">
+                    <i data-lucide="database" style="width: 14px; height: 14px;" class="me-2"></i>schema.sql
+                  </button>
+                  <button class="output-tab-btn text-start" data-tab="api">
+                    <i data-lucide="code" style="width: 14px; height: 14px;" class="me-2"></i>api_endpoints.md
+                  </button>
+                  <button class="output-tab-btn text-start" data-tab="deployment">
+                    <i data-lucide="server" style="width: 14px; height: 14px;" class="me-2"></i>deployment.md
+                  </button>
+                </div>
+              </div>
+
+              <!-- View File Content -->
+              <div class="col-lg-9">
+                <div class="custom-card p-0 overflow-hidden d-flex flex-column h-100" style="min-height: 480px;">
+                  <!-- Code header bar -->
+                  <div class="px-4 py-3 bg-light border-bottom d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                      <i data-lucide="file-code" class="text-primary" style="width: 16px; height: 16px;"></i>
+                      <span class="fs-8 fw-bold font-monospace text-secondary" id="output-active-filename">Prompt.md</span>
+                    </div>
+                    <button class="btn btn-light border btn-sm fs-9 fw-semibold px-2.5 py-1 d-flex align-items-center gap-1.5" id="output-btn-copy-tab">
+                      <i data-lucide="clipboard" style="width: 12px; height: 12px;"></i>
+                      <span>Copy Code</span>
+                    </button>
+                  </div>
+                  <!-- Content pre -->
+                  <div class="flex-grow-1 p-4 bg-white overflow-auto" style="max-height: 400px;">
+                    <pre class="font-monospace text-dark fs-8 whitespace-pre-wrap mb-0" id="output-active-filecontent" style="white-space: pre-wrap; word-break: break-word;"></pre>
+                  </div>
+                  <!-- Footer download single file action -->
+                  <div class="px-4 py-3 bg-light border-top text-end">
+                    <button class="btn btn-outline-primary btn-sm fw-bold px-3 py-1.5 rounded-2" id="output-btn-download-single">
+                      Add Single File to Cabinet
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ============================================ -->
+        <!-- SCREEN: SKILL CENTER                         -->
+        <!-- ============================================ -->
+        <div id="subview-skills" class="subview animate-fade-in-up" style="display: none;">
+          <div class="container-fluid max-w-6xl py-2">
+            <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom pb-3 mb-4 gap-3">
+              <div>
+                <h2 class="fw-bold tracking-tight text-dark mb-1">Skill Center</h2>
+                <p class="fs-7 text-secondary mb-0">Browse preloaded platform instruction blueprints or create your own custom specs.</p>
+              </div>
+              <button class="btn btn-primary fw-bold fs-8 px-4 py-2.5 rounded-3 d-flex align-items-center gap-1.5" id="skill-btn-add-custom">
+                <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
+                <span>Add Custom Skill</span>
+              </button>
+            </div>
+
+            <!-- Preloaded Built-in Blueprints grid -->
+            <div class="row g-4" id="skills-grid-container">
+              <!-- Generated dynamically in App.js -->
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ============================================ -->
+        <!-- SCREEN: COMMUNITY ARENA                      -->
+        <!-- ============================================ -->
+        <div id="subview-community" class="subview animate-fade-in-up" style="display: none;">
+          <div class="container-fluid max-w-6xl py-2">
+            <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom pb-3 mb-4 gap-3">
+              <div>
+                <h2 class="fw-bold tracking-tight text-dark mb-1">Community Arena</h2>
+                <p class="fs-7 text-secondary mb-0">Revisit, download, or review prompt specifications created and shared by developers.</p>
+              </div>
+              <button class="btn btn-primary fw-bold fs-8 px-4 py-2.5 rounded-3 d-flex align-items-center gap-1.5" id="comm-btn-publish-own">
+                <i data-lucide="share" style="width: 14px; height: 14px;"></i>
+                <span>Publish to Community</span>
+              </button>
+            </div>
+
+            <!-- Floating Banner for Guest Users -->
+            <div id="community-guest-banner" class="alert alert-primary alert-dismissible fade show border-0 rounded-4 p-4 mb-4 d-flex flex-column flex-md-row align-items-md-center justify-content-between relative overflow-hidden shadow-sm" style="background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%); display: none; padding-right: 3.5rem !important;">
+              <div class="d-flex align-items-center gap-3 relative z-2 mb-3 mb-md-0">
+                <div class="bg-white bg-opacity-20 text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; flex-shrink: 0;">
+                  <i data-lucide="shield-alert" style="width: 20px; height: 20px; color: white;"></i>
+                </div>
+                <div>
+                  <p class="fs-8 text-white mb-0 fw-semibold" style="line-height: 1.5; font-size: 13.5px;">
+                    🔒 You are browsing as a Guest. Login to chat with creators, buy prompts, sell prompts, like posts, save prompts, and unlock all community features.
+                  </p>
+                </div>
+              </div>
+              <div class="d-flex gap-2 relative z-2" style="flex-shrink: 0;">
+                <button class="btn btn-light btn-sm fw-bold px-3 py-2 rounded-3 shadow-sm text-primary hover-scale fs-9" onclick="openLoginModal('login')">
+                  Login
+                </button>
+                <button class="btn btn-outline-light btn-sm fw-bold px-3 py-2 rounded-3 hover-scale text-white border-light border-opacity-40 fs-9" onclick="openLoginModal('signup')">
+                  Sign Up
+                </button>
+              </div>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close" onclick="dismissGuestBanner();" style="position: absolute; top: 50%; right: 1rem; transform: translateY(-50%); margin-top: 0;"></button>
+            </div>
+
+            <!-- Search Filter Bar -->
+            <div class="position-relative mb-4">
+              <span class="position-absolute top-50 start-0 translate-middle-y ps-3 text-secondary pointer-events-none">
+                <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+              </span>
+              <input type="text" class="form-control ps-5 py-2.5 fs-7 bg-white border rounded-3 text-dark" id="comm-search-input" placeholder="Search community prompt specs...">
+            </div>
+
+            <!-- Prompts Grid -->
+            <div class="row g-4" id="community-prompts-grid">
+              <!-- Generated dynamically in App.js -->
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ============================================ -->
+        <!-- SCREEN: MARKETPLACE                          -->
+        <!-- ============================================ -->
+        <div id="subview-marketplace" class="subview animate-fade-in-up" style="display: none;">
+          <div class="container-fluid max-w-6xl py-2">
+            <div class="border-bottom pb-3 mb-4">
+              <h2 class="fw-bold tracking-tight text-dark mb-1">Marketplace Store</h2>
+              <p class="fs-7 text-secondary mb-0">Acquire advanced high-fidelity orchestration blueprint packs and engineering models.</p>
+            </div>
+
+            <div class="row g-4 mb-4" id="marketplace-banner-row">
+              <div class="col-12 col-xl-7">
+                <div class="marketplace-sell-banner marketplace-sell-banner-compact d-flex align-items-center gap-3 p-2.5 rounded-4 position-relative overflow-hidden">
+                  <div class="d-flex align-items-center justify-content-center marketplace-sell-icon flex-shrink-0">
+                    <i data-lucide="rocket" style="width: 20px; height: 20px;"></i>
+                  </div>
+                  <div class="flex-grow-1 min-w-0">
+                    <div class="d-flex align-items-center gap-2 mb-1.5">
+                      <span class="badge bg-white bg-opacity-20 text-white fs-9 rounded-pill px-2.5 py-1">Creator Marketplace</span>
+                    </div>
+                    <h4 class="fw-bold text-white mb-1 fs-7">Sell Your Prompt</h4>
+                    <p class="fs-9 text-white text-opacity-90 mb-2">Share your AI prompts and earn from your expertise.</p>
+                    <div class="d-flex flex-wrap gap-1.5 mb-1 marketplace-banner-stats">
+                      <span class="fs-8 text-white opacity-90">Creators <strong>350+</strong></span>
+                      <span class="fs-8 text-white opacity-90">Prompts Sold <strong>5000+</strong></span>
+                      <span class="fs-8 text-white opacity-90">Revenue Share <strong>80%</strong></span>
+                    </div>
+                  </div>
+                  <div class="marketplace-banner-actions d-flex flex-column flex-sm-row gap-2 align-self-end align-self-sm-center">
+                    <button class="btn btn-white btn-sm fw-bold px-3 py-1.5 rounded-pill shadow-sm" onclick="openSellPromptModal()">Start Selling</button>
+                    <button class="btn btn-outline-white btn-sm fw-bold px-3 py-1.5 rounded-pill shadow-sm" onclick="switchView('creator-dashboard')">Creator Dashboard</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- List of items -->
+            <div class="row g-4" id="marketplace-grid-container">
+              <!-- Generated dynamically in App.js -->
+            </div>
+          </div>
+        </div>
+
+        <div id="subview-creator-dashboard" class="subview animate-fade-in-up" style="display: none;">
+          <div class="container-fluid max-w-6xl py-2">
+            <div class="d-flex flex-column flex-md-row align-items-start justify-content-between gap-3 border-bottom pb-3 mb-4">
+              <div>
+                <h2 class="fw-bold tracking-tight text-dark mb-1">Creator Dashboard</h2>
+                <p class="fs-7 text-secondary mb-0">Track sales, manage listings, and withdraw your creator earnings.</p>
+              </div>
+              <button class="btn btn-primary fw-bold fs-8 px-4 py-2 rounded-3" onclick="openSellPromptModal()">
+                <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
+                <span>Create New Listing</span>
+              </button>
+            </div>
+
+            <div class="row g-4 mb-4">
+              <div class="col-md-6 col-xl-3">
+                <div class="creator-metric-card p-4 rounded-4 shadow-sm">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="fs-9 text-secondary">Total Sales</span>
+                    <i data-lucide="trending-up" class="text-primary" style="width: 18px; height: 18px;"></i>
+                  </div>
+                  <div class="fs-3 fw-bold text-dark" id="creator-total-sales">0</div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-3">
+                <div class="creator-metric-card p-4 rounded-4 shadow-sm">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="fs-9 text-secondary">Revenue</span>
+                    <i data-lucide="credit-card" class="text-success" style="width: 18px; height: 18px;"></i>
+                  </div>
+                  <div class="fs-3 fw-bold text-dark" id="creator-total-revenue">₹0</div>
+                  <div class="fs-8 text-secondary mt-1">Creator: <strong>80%</strong> / Platform: <strong>20%</strong></div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-3">
+                <div class="creator-metric-card p-4 rounded-4 shadow-sm">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="fs-9 text-secondary">Downloads</span>
+                    <i data-lucide="download" class="text-secondary" style="width: 18px; height: 18px;"></i>
+                  </div>
+                  <div class="fs-3 fw-bold text-dark" id="creator-total-downloads">0</div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-3">
+                <div class="creator-metric-card p-4 rounded-4 shadow-sm">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="fs-9 text-secondary">Avg Rating</span>
+                    <i data-lucide="star" class="text-warning" style="width: 18px; height: 18px;"></i>
+                  </div>
+                  <div class="fs-3 fw-bold text-dark" id="creator-average-rating">4.9</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-xl-7">
+                <div class="custom-card p-4 rounded-4 shadow-sm mb-4">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="fw-bold fs-6 mb-0">My Prompts</h5>
+                    <span class="badge bg-primary bg-opacity-15 text-primary fs-8 rounded-pill px-3 py-1" id="creator-listings-count">0 Listings</span>
+                  </div>
+                  <div id="creator-prompt-list"></div>
+                </div>
+              </div>
+              <div class="col-xl-5">
+                <div class="custom-card p-4 rounded-4 shadow-sm mb-4">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="fw-bold fs-6 mb-0">Sales History</h5>
+                    <span class="badge bg-success bg-opacity-15 text-success fs-8 rounded-pill px-3 py-1">Recent</span>
+                  </div>
+                  <div id="creator-sales-history"></div>
+                </div>
+                <div class="custom-card p-4 rounded-4 shadow-sm">
+                  <h5 class="fw-bold fs-6 mb-3">Withdraw Earnings</h5>
+                  <p class="fs-9 text-secondary mb-3">Balance is automatically calculated with an 80/20 creator revenue split. Withdraw instantly when ready.</p>
+                  <button class="btn btn-primary w-100 fw-bold py-2 rounded-3" onclick="withdrawCreatorEarnings()">Withdraw ₹<span id="creator-withdraw-amount">0</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- SCREEN: SAVED HISTORY                        -->
+        <!-- ============================================ -->
+        <div id="subview-history" class="subview animate-fade-in-up" style="display: none;">
+          <div class="container-fluid max-w-4xl py-2">
+            <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom pb-3 mb-4 gap-3">
+              <div>
+                <h2 class="fw-bold tracking-tight text-dark mb-1">Saved History</h2>
+                <p class="fs-7 text-secondary mb-0">Revisit, rename, or mount previously generated orchestration blueprints.</p>
+              </div>
+              <button class="btn btn-outline-danger fw-bold fs-8 px-4 py-2.5 rounded-3 d-flex align-items-center gap-1.5" id="history-btn-clear-all">
+                <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                <span>Clear All History</span>
+              </button>
+            </div>
+
+            <!-- History Search Bar -->
+            <div class="position-relative mb-4">
+              <span class="position-absolute top-50 start-0 translate-middle-y ps-3 text-secondary">
+                <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+              </span>
+              <input type="text" class="form-control ps-5 py-2.5 fs-7 bg-white border rounded-3 text-dark" id="history-search-input" placeholder="Search your compiled prompt history...">
+            </div>
+
+            <!-- History List Row Group -->
+            <div class="d-flex flex-column gap-3" id="history-items-list">
+              <!-- Generated dynamically in App.js -->
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ============================================ -->
+        <!-- SCREEN: DOWNLOADS CABINET                    -->
+        <!-- ============================================ -->
+        <div id="subview-downloads" class="subview animate-fade-in-up" style="display: none;">
+          <div class="container-fluid max-w-4xl py-2">
+            <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom pb-3 mb-4 gap-3">
+              <div>
+                <h2 class="fw-bold tracking-tight text-dark mb-1">Downloads Cabinet</h2>
+                <p class="fs-7 text-secondary mb-0">Review or view individual files or packages downloaded during active sessions.</p>
+              </div>
+              <button class="btn btn-outline-danger fw-bold fs-8 px-4 py-2.5 rounded-3 d-flex align-items-center gap-1.5" id="downloads-btn-clear-all">
+                <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                <span>Clear Cabinet</span>
+              </button>
+            </div>
+
+            <!-- Cabinet Search Bar -->
+            <div class="position-relative mb-4">
+              <span class="position-absolute top-50 start-0 translate-middle-y ps-3 text-secondary">
+                <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+              </span>
+              <input type="text" class="form-control ps-5 py-2.5 fs-7 bg-white border rounded-3 text-dark" id="downloads-search-input" placeholder="Search downloaded cabinet files...">
+            </div>
+
+            <!-- Bundles list -->
+            <div class="row g-4" id="downloads-grid-container">
+              <!-- Generated dynamically in App.js -->
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ============================================ -->
+        <!-- SCREEN: CONTROL SETTINGS                     -->
+        <!-- ============================================ -->
+        <div id="subview-settings" class="subview animate-fade-in-up" style="display: none;">
+          <div class="container-fluid max-w-3xl py-2">
+            <div class="border-bottom pb-3 mb-4">
+              <h2 class="fw-bold tracking-tight text-dark mb-1">Control Settings</h2>
+              <p class="fs-7 text-secondary mb-0">Adjust visual templates, change language strings, or edit your personal avatar profile.</p>
+            </div>
+
+            <div class="row g-4">
+              <!-- Sidebar configuration card (Profile) -->
+              <div class="col-md-4">
+                <div class="custom-card text-center py-4">
+                  <h6 class="fs-8 fw-bold text-uppercase text-secondary tracking-wider text-start mb-3">Your Profile</h6>
+                  <div class="position-relative d-inline-block mb-3">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces" alt="Avatar" class="rounded-4 border" style="width: 80px; height: 80px; object-fit: cover;" id="settings-profile-img">
+                    <span class="position-absolute bottom-0 end-0 bg-success border border-white border-2 rounded-circle" style="width: 16px; height: 16px;"></span>
+                  </div>
+                  <h5 class="fw-bold text-dark fs-7 mb-1" id="settings-profile-name">Developer Guest</h5>
+                  <p class="fs-9 font-monospace text-secondary mb-3 text-truncate" id="settings-profile-email">guest@promptstudio.io</p>
+                  <span class="badge bg-primary bg-opacity-10 text-primary fs-9 px-2.5 py-1.5 rounded-2">Enterprise Engineer</span>
+                </div>
+              </div>
+
+              <!-- Main configuration variables (Right side) -->
+              <div class="col-md-8">
+                <!-- Profile Edit Form -->
+                <div class="custom-card mb-4">
+                  <h6 class="fs-8 fw-bold text-uppercase text-secondary tracking-wider mb-3 d-flex align-items-center gap-2">
+                    <i data-lucide="user" style="width: 14px; height: 14px;"></i>
+                    <span>Modify Personal Details</span>
+                  </h6>
+
+                  <form id="settings-profile-form">
+                    <div class="row g-3 mb-3">
+                      <div class="col-sm-6">
+                        <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Full Name</label>
+                        <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="settings-name-input" required>
+                      </div>
+                      <div class="col-sm-6">
+                        <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Email Address</label>
+                        <input type="email" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="settings-email-input" required>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary fw-bold fs-8 px-4 py-2 rounded-3">Save Profile Changes</button>
+                  </form>
+                </div>
+
+                <!-- Theme Skin selection card -->
+                <div class="custom-card">
+                  <h6 class="fs-8 fw-bold text-uppercase text-secondary tracking-wider mb-3 d-flex align-items-center gap-2">
+                    <i data-lucide="palette" style="width: 14px; height: 14px;"></i>
+                    <span>Visual Workspace Theme & Language</span>
+                  </h6>
+
+                  <div class="mb-4">
+                    <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-2.5 d-block">Visual Theme</label>
+                    <div class="row g-3">
+                      <div class="col-sm-6">
+                        <button class="btn btn-white w-100 border text-start p-3 rounded-3 d-flex align-items-center gap-2.5 hover-scale active" id="settings-theme-light-btn">
+                          <i data-lucide="sun" class="text-warning" style="width: 18px; height: 18px;"></i>
+                          <div>
+                            <p class="fw-bold fs-8 text-dark mb-0 leading-tight">Minimal Light</p>
+                            <p class="fs-9 text-muted mb-0">High contrast Apple slate</p>
+                          </div>
+                        </button>
+                      </div>
+                      <div class="col-sm-6">
+                        <button class="btn btn-white w-100 border text-start p-3 rounded-3 d-flex align-items-center gap-2.5 hover-scale" id="settings-theme-dark-btn">
+                          <i data-lucide="moon" class="text-secondary" style="width: 18px; height: 18px;"></i>
+                          <div>
+                            <p class="fw-bold fs-8 text-dark mb-0 leading-tight">Obsidian Dark</p>
+                            <p class="fs-9 text-muted mb-0">Deep developer workspace</p>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="border-top pt-3">
+                    <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-2.5 d-block">Language Translation</label>
+                    <div class="d-flex gap-2">
+                      <button class="btn btn-primary btn-sm fs-8 px-4 py-2 rounded-2" id="settings-lang-en-btn">English (Default)</button>
+                      <button class="btn btn-outline-secondary btn-sm fs-8 px-4 py-2 rounded-2" id="settings-lang-ta-btn">தமிழ் (Tamil Mock)</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+
+    <!-- ============================================ -->
+    <!-- 3. DIALOG MODAL LAYOUT OVERLAYS              -->
+    <!-- ============================================ -->
+    
+    <!-- MODAL A: AUTH USER LOGIN / SIGNUP -->
+    <div class="modal-backdrop-custom d-none" id="modal-login-container">
+      <div class="custom-card max-w-sm w-100 mx-3 p-4 shadow-lg animate-fade-in-up" style="max-width: 400px; background-color: var(--bg-card);">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-3 shadow-sm" style="width: 32px; height: 32px;">
+              <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
+            </div>
+            <span class="fw-bold fs-7 text-dark">Portal Authenticator</span>
+          </div>
+          <button class="btn-close fs-9" id="modal-login-close"></button>
+        </div>
+
+        <h4 class="fw-bold text-dark fs-5 mb-1" id="login-modal-title">Sign In to Workspace</h4>
+        <p class="fs-8 text-secondary mb-4" id="login-modal-desc">Access high fidelity offline specifications compilers and libraries.</p>
+
+        <form id="auth-login-form">
+          <div class="mb-3">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Full Name</label>
+            <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="auth-name-input" value="Sarah Jenkins" required>
+          </div>
+          <div class="mb-3">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Email Address</label>
+            <input type="email" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="auth-email-input" value="sarah@anthropic.io" required>
+          </div>
+          <div class="mb-4">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Developer Role</label>
+            <select class="form-select fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="auth-role-input">
+              <option value="Enterprise Developer">Enterprise Developer</option>
+              <option value="Core AI Engineer">Core AI Engineer</option>
+              <option value="Product Manager">Product Manager</option>
+              <option value="Junior Architect">Junior Architect</option>
+            </select>
+          </div>
+          
+          <button type="submit" class="btn btn-primary w-100 fw-bold py-2.5 rounded-3 mb-3 shadow" id="auth-submit-btn">Continue to Workspace</button>
+        </form>
+
+        <div class="text-center pt-2">
+          <button class="btn btn-link p-0 text-primary text-decoration-none fs-8 fw-bold" id="auth-toggle-mode-btn">Don't have an account? Sign Up</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL B: CODE / FILE READER VIEW -->
+    <div class="modal-backdrop-custom d-none" id="modal-filereader-container">
+      <div class="custom-card max-w-2xl w-100 mx-3 p-0 shadow-lg overflow-hidden animate-fade-in-up" style="max-width: 700px; background-color: var(--bg-card);">
+        <div class="absolute top-0 left-0 right-0 h-1 bg-primary" style="height: 4px; background-color: var(--primary-color);"></div>
+        
+        <div class="d-flex align-items-center justify-content-between px-4 py-3 bg-light border-b border-light">
+          <div class="d-flex align-items-center gap-2">
+            <i data-lucide="file-code" class="text-primary" style="width: 16px; height: 16px;"></i>
+            <span class="fs-8 fw-bold text-secondary font-monospace" id="filereader-modal-path">Cabinet Reader &gt; file.md</span>
+          </div>
+          <button class="btn-close fs-9" id="modal-filereader-close"></button>
+        </div>
+
+        <div class="p-4 bg-white" style="height: 380px; overflow-y: auto;">
+          <pre class="font-monospace text-dark fs-8 leading-relaxed whitespace-pre-wrap mb-0" id="filereader-modal-content" style="white-space: pre-wrap; word-break: break-word;"></pre>
+        </div>
+
+        <div class="px-4 py-3 bg-light border-top text-end">
+          <button class="btn btn-primary fs-8 fw-bold px-4 py-2 rounded-2" id="filereader-modal-copy-btn">Copy to Clipboard</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL C: ADD CUSTOM SKILL BLUEPRINT -->
+    <div class="modal-backdrop-custom d-none" id="modal-skill-container">
+      <div class="custom-card max-w-md w-100 mx-3 p-4 shadow-lg animate-fade-in-up" style="max-width: 500px; background-color: var(--bg-card);">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <h5 class="fw-bold text-dark fs-5 mb-0">Create Custom Skill Blueprint</h5>
+          <button class="btn-close fs-9" id="modal-skill-close"></button>
+        </div>
+
+        <form id="skill-creator-form">
+          <div class="mb-3">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Skill Name</label>
+            <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="skill-name-input" placeholder="e.g. SQLite Optimizer" required>
+          </div>
+          <div class="mb-3">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Technology</label>
+            <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="skill-tech-input" placeholder="e.g. SQLite, SQL, Vanilla Node.js" required>
+          </div>
+          <div class="mb-3">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Description</label>
+            <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="skill-desc-input" placeholder="e.g. Optimizes Local Database transactions and indexing" required>
+          </div>
+          <div class="mb-4">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Instructions (System prompt directive)</label>
+            <textarea class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="skill-instructions-input" rows="4" placeholder="e.g. You are a SQLite indexing expert. Ensure all tables have primary keys, index foreign-key columns, and write transactional safety directives..." required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary w-100 fw-bold py-2.5 rounded-3 shadow">Create & Deploy Custom Skill</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL D: PUBLISH PROMPT TO COMMUNITY ARENA -->
+    <div class="modal-backdrop-custom d-none" id="modal-publish-container">
+      <div class="custom-card max-w-md w-100 mx-3 p-4 shadow-lg animate-fade-in-up" style="max-width: 500px; background-color: var(--bg-card);">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <h5 class="fw-bold text-dark fs-5 mb-0">Publish Prompt to Arena</h5>
+          <button class="btn-close fs-9" id="modal-publish-close"></button>
+        </div>
+
+        <form id="publish-prompts-form">
+          <div class="mb-3">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Prompt Spec Title</label>
+            <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="publish-title-input" placeholder="e.g. Premium Gym & Personal Trainer Booking Scheduler" required>
+          </div>
+          <div class="mb-3">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Short Description</label>
+            <textarea class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark resize-none" id="publish-desc-input" rows="3" placeholder="e.g. Highly detailed role instructions to synthesize full gym schedules and calendar reservations with PostgreSQL..." required></textarea>
+          </div>
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6">
+              <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Price Mode ($)</label>
+              <select class="form-select fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="publish-price-input">
+                <option value="0">Free of Charge ($0.00)</option>
+                <option value="4.99">Standard Tier ($4.99)</option>
+                <option value="9.99">Premium Tier ($9.99)</option>
+                <option value="19.99">Enterprise Tier ($19.99)</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Category Tag</label>
+              <select class="form-select fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="publish-tag-input">
+                <option value="Frontend">Frontend Website</option>
+                <option value="Fullstack">Fullstack SaaS</option>
+                <option value="Database">Database Schema</option>
+                <option value="AI">AI Prompting Model</option>
+              </select>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary w-100 fw-bold py-2.5 rounded-3 shadow">Publish to Arena</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL F: SELL PROMPT SUBMISSION -->
+    <div class="modal-backdrop-custom d-none" id="modal-sell-prompt-container">
+      <div class="custom-card max-w-2xl w-100 mx-3 p-4 shadow-lg animate-fade-in-up" style="max-width: 760px; background-color: var(--bg-card);">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h5 class="fw-bold text-dark fs-5 mb-1">Submit Your Prompt Listing</h5>
+            <p class="fs-8 text-secondary mb-0">Create a premium prompt listing for the marketplace and earn 80% creator revenue.</p>
+          </div>
+          <button class="btn-close fs-9" id="modal-sell-prompt-close"></button>
+        </div>
+
+        <form id="sell-prompt-form">
+          <input type="hidden" id="sell-prompt-id" value="" />
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Prompt Title</label>
+              <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="sell-title-input" placeholder="Advanced React Code Generator" required>
+            </div>
+            <div class="col-md-6">
+              <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Category</label>
+              <select class="form-select fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="sell-category-input" required>
+                <option value="AI">AI</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="Data Science">Data Science</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Automation">Automation</option>
+                <option value="Design">Design</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Description</label>
+            <textarea class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark resize-none" id="sell-description-input" rows="3" placeholder="Explain what this prompt does." required></textarea>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Skill Requirements</label>
+              <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="sell-requirements-input" placeholder="React.js, Python, LLM, RAG" required>
+            </div>
+            <div class="col-md-6">
+              <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Prompt Preview</label>
+              <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="sell-preview-input" placeholder="Short preview visible to buyers." required>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Full Prompt Content</label>
+            <textarea class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark resize-none" id="sell-content-input" rows="6" placeholder="Secure full prompt content for buyer access." required></textarea>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Set Price</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-secondary border rounded-start-3">₹</span>
+                <input type="number" min="0" step="1" class="form-control fs-7 px-3 py-2 border rounded-end-3 bg-light text-dark" id="sell-price-input" placeholder="499" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Currency</label>
+              <select class="form-select fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="sell-currency-input" disabled>
+                <option value="INR">INR ₹</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Creator Name</label>
+              <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="sell-creator-name-input" placeholder="Your name" required>
+            </div>
+            <div class="col-md-6">
+              <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Profile Image URL</label>
+              <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="sell-creator-avatar-input" placeholder="https://..." required>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Bio</label>
+            <textarea class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark resize-none" id="sell-creator-bio-input" rows="2" placeholder="Short creator bio."></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label class="fs-8 fw-bold text-secondary text-uppercase tracking-wider mb-1.5 d-block">Social Links</label>
+            <input type="text" class="form-control fs-7 px-3 py-2 border rounded-3 bg-light text-dark" id="sell-creator-social-input" placeholder="Twitter / LinkedIn / Portfolio" />
+          </div>
+
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <button type="submit" class="btn btn-primary fw-bold fs-8 px-4 py-2 rounded-3">Submit For Review</button>
+            <span class="fs-8 text-secondary">Status after submit: <strong>Pending Approval</strong></span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL E: GUEST PREMIUM LOGIN REQUIRED -->
+    <div class="modal-backdrop-custom d-none" id="modal-guest-login-container" style="z-index: 1060;">
+      <div class="custom-card max-w-sm w-100 mx-3 p-4 shadow-lg animate-fade-in-up" style="max-width: 440px; background-color: var(--bg-card); border-radius: 20px;">
+        <div class="text-center mb-4">
+          <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-3 animate-pulse" style="width: 60px; height: 60px;">
+            <i data-lucide="lock" style="width: 28px; height: 28px;"></i>
+          </div>
+          <h4 class="fw-bold text-dark fs-5 mb-1" id="guest-modal-title">🔒 Login Required</h4>
+          <p class="fs-8 text-muted mb-0">Premium Experience Required</p>
+        </div>
+
+        <div class="fs-8 text-secondary mb-4 text-center leading-relaxed" id="guest-modal-message">
+          You are currently browsing as a guest.<br><br>
+          To access premium prompts, purchase prompt packs, save favorites, sell your own prompts, and join the community, please sign in.<br><br>
+          Create your free account in less than 30 seconds.
+        </div>
+
+        <div class="d-flex flex-column gap-2 mb-3">
+          <button class="btn btn-primary w-100 fw-bold py-2.5 rounded-3 d-flex align-items-center justify-content-center gap-2 shadow-sm" id="guest-modal-login-btn">
+            <i data-lucide="log-in" style="width: 16px; height: 16px;"></i>
+            <span>Login</span>
+          </button>
+          <button class="btn btn-outline-secondary w-100 fw-bold py-2.5 rounded-3 border-secondary border-opacity-25 bg-white text-secondary hover-bg-light" id="guest-modal-signup-btn">
+            <span>Sign Up</span>
+          </button>
+        </div>
+
+        <div class="text-center">
+          <button class="btn btn-link p-0 text-muted text-decoration-none fs-8.5 fw-semibold" id="guest-modal-continue-btn">Continue as Guest</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL CHECKOUT -->
+    <div class="modal-backdrop-custom d-none" id="modal-checkout-container" style="z-index: 1055;">
+      <div class="custom-card checkout-modal-panel max-w-xl w-100 mx-3 p-0 shadow-lg overflow-hidden" style="max-width: 720px; background-color: var(--bg-card); border-radius: 20px;">
+        <div class="d-flex align-items-center justify-content-between px-4 py-3 bg-light border-bottom">
+          <div>
+            <h5 class="fw-bold text-dark fs-5 mb-0">Purchase Prompt</h5>
+            <p class="fs-8 text-secondary mb-0">Secure your prompt with trusted Indian payment methods.</p>
+          </div>
+          <button class="btn-close fs-9" onclick="closeCheckoutModal()"></button>
+        </div>
+        <div class="p-4">
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="custom-card p-3 border rounded-4 bg-white shadow-sm">
+                <h6 class="fs-8 fw-bold mb-3">Product Information</h6>
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <div class="rounded-3 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" id="checkout-product-icon" style="width: 44px; height: 44px;">
+                    <i data-lucide="rocket" style="width: 20px; height: 20px;"></i>
+                  </div>
+                  <div>
+                    <div id="checkout-product-title" class="fw-bold text-dark fs-7">AI Code Refactoring Master Suite</div>
+                    <div class="fs-9 text-muted" id="checkout-product-creator">by Alex Rivera</div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <span class="badge bg-warning bg-opacity-15 text-warning fs-9 rounded-pill px-2 py-1" id="checkout-product-rating">4.9 ★</span>
+                  <span class="badge bg-secondary bg-opacity-10 text-secondary fs-9 rounded-pill px-2 py-1">Verified Creator</span>
+                </div>
+                <p class="fs-9 text-secondary mb-2" id="checkout-product-description">An elite, comprehensive set of engineered system prompts for auditing performance bottlenecks.</p>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <span class="fs-9 text-secondary">Original Price</span>
+                  <span class="fs-8 fw-bold text-dark" id="checkout-product-price">₹2499</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="custom-card p-3 border rounded-4 bg-white shadow-sm">
+                <h6 class="fs-8 fw-bold mb-3">Order Summary</h6>
+                <div class="d-flex justify-content-between mb-2"><span class="fs-9 text-secondary">Original Price</span><span class="fs-9 fw-semibold text-dark" id="checkout-order-amount">₹2499</span></div>
+                <div class="d-flex justify-content-between mb-2"><span class="fs-9 text-secondary">Platform Fee</span><span class="fs-9 fw-semibold text-dark" id="checkout-platform-fee">₹50</span></div>
+                <div class="d-flex justify-content-between mb-3"><span class="fs-9 text-secondary">GST</span><span class="fs-9 fw-semibold text-dark" id="checkout-gst">₹90</span></div>
+                <div class="border-top pt-3 d-flex justify-content-between align-items-center mb-3"><span class="fs-9 fw-bold text-dark">Total</span><span class="fs-8 fw-bold text-primary" id="checkout-final-amount">₹2639</span></div>
+                <div class="mb-3">
+                  <label class="fs-9 text-uppercase fw-bold text-secondary mb-2 d-block">Payment Method</label>
+                  <div id="checkout-payment-methods" class="d-flex flex-column gap-2"></div>
+                </div>
+                <button class="btn btn-primary w-100 fw-bold py-2.5 rounded-3" onclick="processCheckout()">Proceed Payment</button>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 d-none" id="checkout-success-container">
+            <div class="custom-card p-4 border rounded-4 bg-success bg-opacity-10 border-success">
+              <h6 class="fw-bold text-success mb-3" id="checkout-success-title">Payment Successful</h6>
+              <div id="checkout-success-details" class="fs-8 text-dark"></div>
+              <div class="mt-4 d-flex flex-wrap gap-2">
+                <button class="btn btn-white border btn-sm fw-bold px-3 py-2 rounded-3" onclick="downloadPurchasedPrompt()">Download Prompt</button>
+                <button class="btn btn-light border btn-sm fw-bold px-3 py-2 rounded-3" onclick="goToDownloadsFromCheckout()">Go To Downloads</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL F: PROMPT DETAILS PREVIEW -->
+    <div class="modal-backdrop-custom d-none" id="modal-prompt-preview-container" style="z-index: 1055;">
+      <div class="custom-card max-w-lg w-100 mx-3 p-0 shadow-lg overflow-hidden animate-fade-in-up" style="max-width: 600px; background-color: var(--bg-card); border-radius: 20px;">
+        <div class="d-flex align-items-center justify-content-between px-4 py-3 bg-light border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <i data-lucide="eye" class="text-primary" style="width: 16px; height: 16px;"></i>
+            <span class="fs-8 fw-bold text-secondary font-monospace">Prompt Specification Preview</span>
+          </div>
+          <button class="btn-close fs-9" id="modal-prompt-preview-close" onclick="closePromptPreview()"></button>
+        </div>
+        <div class="p-4 bg-white" id="prompt-preview-body" style="max-height: 450px; overflow-y: auto;">
+          <!-- Dynamically Rendered -->
+        </div>
+      </div>
+    </div>
+
+
+    <!-- MODAL G: CREATOR PROFILE DETAILS -->
+    <div class="modal-backdrop-custom d-none" id="modal-creator-profile-container" style="z-index: 1050;">
+      <div class="custom-card max-w-md w-100 mx-3 p-0 shadow-lg overflow-hidden animate-fade-in-up" style="max-width: 500px; background-color: var(--bg-card); border-radius: 20px;">
+        <div class="d-flex align-items-center justify-content-between px-4 py-3 bg-light border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <i data-lucide="user" class="text-primary" style="width: 16px; height: 16px;"></i>
+            <span class="fs-8 fw-bold text-secondary font-monospace">Developer Profile Details</span>
+          </div>
+          <button class="btn-close fs-9" id="modal-creator-profile-close" onclick="closeCreatorProfile()"></button>
+        </div>
+        <div class="p-4 bg-white" id="creator-profile-body" style="max-height: 500px; overflow-y: auto;">
+          <!-- Dynamically Rendered -->
+        </div>
+      </div>
+    </div>
+
+
+    <!-- MODAL H: COMMUNITY DISCUSSIONS / COMMENTS -->
+    <div class="modal-backdrop-custom d-none" id="modal-comments-container" style="z-index: 1052;">
+      <div class="custom-card max-w-md w-100 mx-3 p-0 shadow-lg overflow-hidden animate-fade-in-up" style="max-width: 500px; background-color: var(--bg-card); border-radius: 20px;">
+        <div class="d-flex align-items-center justify-content-between px-4 py-3 bg-light border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <i data-lucide="message-square" class="text-primary" style="width: 16px; height: 16px;"></i>
+            <span class="fs-8 fw-bold text-secondary font-monospace" id="comments-modal-title">Discussions Thread</span>
+          </div>
+          <button class="btn-close fs-9" id="modal-comments-close" onclick="closeCommentsModal()"></button>
+        </div>
+        
+        <!-- Comments list -->
+        <div class="p-4 bg-white" id="comments-list-body" style="height: 280px; overflow-y: auto;">
+          <!-- Dynamically Rendered -->
+        </div>
+
+        <!-- Input Section -->
+        <div class="p-3 bg-light border-top">
+          <form id="comments-post-form" onsubmit="postNewComment(event)">
+            <div class="input-group">
+              <input type="text" class="form-control fs-8" id="comment-text-input" required>
+              <button class="btn btn-primary btn-sm px-3 fw-bold fs-9" type="submit" id="comment-submit-btn">Post</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ============================================ -->
+    <!-- 4. FLOATING GLOBAL NOTIFICATION TOAST        -->
+    <!-- ============================================ -->
+    <div class="position-fixed bottom-0 end-0 p-4 z-3" style="max-width: 320px;">
+      <div class="toast align-items-center text-white bg-dark border-0 rounded-3 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true" id="app-global-toast">
+        <div class="d-flex">
+          <div class="toast-body d-flex align-items-center gap-2 fs-8 font-sans">
+            <i data-lucide="sparkles" class="text-primary" style="width: 15px; height: 15px;"></i>
+            <span id="global-toast-text">Success message compiled.</span>
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Application Javascript Module -->
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>

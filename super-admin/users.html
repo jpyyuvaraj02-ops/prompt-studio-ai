@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Studio AI - Master Users Control</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="/super-admin/css/super-admin.css" />
+    <link rel="stylesheet" href="/super-admin/css/responsive.css" />
+  </head>
+  <body style="background-color: #030712; color: #f3f4f6;">
+
+    <!-- Sidebar injection target -->
+    <div id="super-sidebar-target"></div>
+
+    <!-- Main Content Panel -->
+    <div class="super-main-wrapper">
+      
+      <!-- Header target -->
+      <div id="super-header-target" data-title="Master User Directory"></div>
+
+      <!-- Quick Search Bar -->
+      <div class="premium-card bg-dark border-secondary p-3.5 mb-4 animate-fade-in">
+        <div class="row g-3 align-items-center justify-content-between">
+          <div class="col-12 col-md-8 d-flex flex-wrap gap-2">
+            <div class="position-relative flex-grow-1" style="max-width: 320px;">
+              <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-white-50"><i class="bi bi-search"></i></span>
+              <input type="text" class="form-control bg-dark border-secondary text-white rounded-pill ps-5 fs-8" id="super-user-search" placeholder="Search Master email or ID..." onkeyup="loadMasterUsers()" />
+            </div>
+
+            <select class="form-select bg-dark border-secondary text-white rounded-pill fs-8" id="super-user-role" style="max-width: 140px;" onchange="loadMasterUsers()">
+              <option value="All">All Roles</option>
+              <option value="Admin">Admin</option>
+              <option value="Creator">Creator</option>
+              <option value="User">User</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users Grid -->
+      <div class="premium-card bg-dark border-secondary mb-4 animate-fade-in">
+        <div class="table-responsive">
+          <table class="table custom-table table-dark align-middle mb-0 fs-8">
+            <thead>
+              <tr style="color: #9ca3af;">
+                <th>ID</th>
+                <th>Master Account</th>
+                <th>Email Address</th>
+                <th>Role</th>
+                <th>Verification</th>
+                <th>Status</th>
+                <th>Action Controls</th>
+              </tr>
+            </thead>
+            <tbody id="super-users-table-body">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Super Admin Scripts -->
+    <script src="/admin/js/storage.js" type="module"></script>
+    <script src="/super-admin/js/dashboard.js" type="module"></script>
+
+    <script>
+      function loadMasterUsers() {
+        const tableBody = document.getElementById('super-users-table-body');
+        if (!tableBody) return;
+
+        const users = StorageHelper.get('ps_users_list');
+        const query = document.getElementById('super-user-search').value.toLowerCase();
+        const role = document.getElementById('super-user-role').value;
+
+        const filtered = users.filter(u => {
+          const matchesSearch = u.name.toLowerCase().includes(query) || u.email.toLowerCase().includes(query) || u.id.toLowerCase().includes(query);
+          const matchesRole = role === 'All' || u.role === role;
+          return matchesSearch && matchesRole;
+        });
+
+        if (filtered.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-white-50">No master user records found.</td></tr>`;
+        } else {
+          tableBody.innerHTML = filtered.map(u => {
+            const isVerified = u.verified ? 'checked' : '';
+            const statusBadge = u.status === 'Active' ? 'bg-success bg-opacity-20 text-success' : 'bg-danger bg-opacity-20 text-danger';
+            return `
+              <tr>
+                <td><span class="font-monospace fw-bold text-white-50" style="font-size: 0.8rem;">${u.id}</span></td>
+                <td>
+                  <div class="d-flex align-items-center gap-2.5">
+                    <img src="${u.avatar}" class="rounded-circle border" style="width: 28px; height: 28px; object-fit: cover;" />
+                    <span class="fw-bold text-white">${u.name}</span>
+                    ${u.verified ? `<i class="bi bi-patch-check-fill text-info" title="Verified Creator"></i>` : ''}
+                  </div>
+                </td>
+                <td><span class="text-white-50">${u.email}</span></td>
+                <td><span class="badge bg-light text-dark px-2 py-0.5 rounded text-uppercase">${u.role}</span></td>
+                <td>
+                  <div class="form-check form-switch d-inline-block">
+                    <input class="form-check-input" type="checkbox" role="switch" ${isVerified} onchange="toggleMasterUserVerification('${u.id}', this.checked)" />
+                  </div>
+                </td>
+                <td><span class="badge ${statusBadge} px-2 py-0.5 rounded">${u.status}</span></td>
+                <td>
+                  <div class="d-flex align-items-center gap-1.5">
+                    <button class="btn btn-dark btn-sm border-secondary text-primary" onclick="promoteMasterRole('${u.id}', 'Admin')" title="Promote to Admin"><i class="bi bi-shield-lock-fill"></i></button>
+                    <button class="btn btn-dark btn-sm border-secondary text-warning" onclick="toggleMasterUserStatus('${u.id}')" title="Suspend/Unsuspend"><i class="bi bi-slash-circle"></i></button>
+                    <button class="btn btn-dark btn-sm border-secondary text-danger" onclick="purgeMasterUser('${u.id}')" title="Purge Account"><i class="bi bi-trash"></i></button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+      }
+
+      window.toggleMasterUserVerification = function(id, isChecked) {
+        const users = StorageHelper.get('ps_users_list');
+        const index = users.findIndex(u => u.id === id);
+        if (index !== -1) {
+          users[index].verified = isChecked;
+          StorageHelper.set('ps_users_list', users);
+
+          StorageHelper.addLog("super@promptstudio.ai", "Toggled Creator Verification", "Users", "Success", `Set verified creator flag to ${isChecked} for ${users[index].name}`);
+          loadMasterUsers();
+        }
+      };
+
+      window.promoteMasterRole = function(id, role) {
+        const users = StorageHelper.get('ps_users_list');
+        const index = users.findIndex(u => u.id === id);
+        if (index !== -1) {
+          const oldRole = users[index].role;
+          users[index].role = role;
+          StorageHelper.set('ps_users_list', users);
+
+          StorageHelper.addLog("super@promptstudio.ai", "Promoted User", "Users", "Success", `Promoted role of ${users[index].name} from ${oldRole} to ${role}`);
+          alert(`Successfully promoted ${users[index].name} to ${role}!`);
+          loadMasterUsers();
+        }
+      };
+
+      window.toggleMasterUserStatus = function(id) {
+        const users = StorageHelper.get('ps_users_list');
+        const index = users.findIndex(u => u.id === id);
+        if (index !== -1) {
+          const next = users[index].status === 'Active' ? 'Suspended' : 'Active';
+          users[index].status = next;
+          StorageHelper.set('ps_users_list', users);
+
+          StorageHelper.addLog("super@promptstudio.ai", `User ${next}`, "Users", "Success", `${next} user account access for ${users[index].name}`);
+          loadMasterUsers();
+        }
+      };
+
+      window.purgeMasterUser = function(id) {
+        if (confirm("Are you absolutely sure you want to permanently purge this account? This action cannot be reversed.")) {
+          const users = StorageHelper.get('ps_users_list');
+          const target = users.find(u => u.id === id);
+          const updated = users.filter(u => u.id !== id);
+          StorageHelper.set('ps_users_list', updated);
+
+          StorageHelper.addLog("super@promptstudio.ai", "Purged Account", "Users", "Success", `Permanently deleted user account ${target ? target.name : id}`);
+          loadMasterUsers();
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', loadMasterUsers);
+    </script>
+  </body>
+</html>

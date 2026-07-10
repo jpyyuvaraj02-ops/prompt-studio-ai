@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Studio AI - Master Community Control</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="/super-admin/css/super-admin.css" />
+    <link rel="stylesheet" href="/super-admin/css/responsive.css" />
+  </head>
+  <body style="background-color: #030712; color: #f3f4f6;">
+
+    <!-- Sidebar injection target -->
+    <div id="super-sidebar-target"></div>
+
+    <!-- Main Content Panel -->
+    <div class="super-main-wrapper">
+      
+      <!-- Header target -->
+      <div id="super-header-target" data-title="Master Community Controls"></div>
+
+      <!-- Quick Search Bar -->
+      <div class="premium-card bg-dark border-secondary p-3.5 mb-4 animate-fade-in">
+        <div class="row g-3 align-items-center justify-content-between">
+          <div class="col-12 col-md-8 d-flex flex-wrap gap-2">
+            <div class="position-relative flex-grow-1" style="max-width: 320px;">
+              <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-white-50"><i class="bi bi-search"></i></span>
+              <input type="text" class="form-control bg-dark border-secondary text-white rounded-pill ps-5 fs-8" id="super-community-search" placeholder="Search title or tags..." onkeyup="loadMasterCommunity()" />
+            </div>
+
+            <select class="form-select bg-dark border-secondary text-white rounded-pill fs-8" id="super-community-category" style="max-width: 140px;" onchange="loadMasterCommunity()">
+              <option value="All">All Categories</option>
+              <option value="Frontend">Frontend</option>
+              <option value="Fullstack">Fullstack</option>
+              <option value="Database">Database</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community Moderation Grid -->
+      <div class="premium-card bg-dark border-secondary mb-4 animate-fade-in">
+        <div class="table-responsive">
+          <table class="table custom-table table-dark align-middle mb-0 fs-8">
+            <thead>
+              <tr style="color: #9ca3af;">
+                <th>ID</th>
+                <th>Prompt Details</th>
+                <th>Creator Name</th>
+                <th>Category</th>
+                <th>Pinned</th>
+                <th>Featured</th>
+                <th>Hidden</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="super-community-table-body">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Super Admin Scripts -->
+    <script src="/admin/js/storage.js" type="module"></script>
+    <script src="/super-admin/js/dashboard.js" type="module"></script>
+
+    <script>
+      function loadMasterCommunity() {
+        const tableBody = document.getElementById('super-community-table-body');
+        if (!tableBody) return;
+
+        const prompts = StorageHelper.get('ps_community');
+        const query = document.getElementById('super-community-search').value.toLowerCase();
+        const category = document.getElementById('super-community-category').value;
+
+        const filtered = prompts.filter(p => {
+          const matchesSearch = p.title.toLowerCase().includes(query) || p.description.toLowerCase().includes(query) || (p.creator?.name || "").toLowerCase().includes(query);
+          const matchesCategory = category === 'All' || p.category === category;
+          return matchesSearch && matchesCategory;
+        });
+
+        if (filtered.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="8" class="text-center py-4 text-white-50">No community records found.</td></tr>`;
+        } else {
+          tableBody.innerHTML = filtered.map(p => {
+            const isPinned = p.pinned ? 'checked' : '';
+            const isFeatured = p.featured ? 'checked' : '';
+            const isHidden = p.hidden ? 'checked' : '';
+            return `
+              <tr>
+                <td><span class="font-monospace fw-bold text-white-50" style="font-size: 0.8rem;">${p.id}</span></td>
+                <td>
+                  <div style="max-width: 280px;">
+                    <span class="fw-bold text-white d-block text-truncate" title="${p.title}">${p.title}</span>
+                    <span class="text-white-50 fs-9 text-truncate d-block" style="font-size: 0.75rem;">${p.description}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <img src="${p.creator?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80'}" class="rounded-circle border" style="width: 24px; height: 24px; object-fit: cover;" />
+                    <span class="fs-9 fw-semibold text-white">${p.creator?.name || 'Anonymous'}</span>
+                  </div>
+                </td>
+                <td><span class="badge bg-light text-dark px-2 py-0.5 rounded">${p.category}</span></td>
+                <td>
+                  <div class="form-check form-switch d-inline-block">
+                    <input class="form-check-input" type="checkbox" ${isPinned} onchange="toggleMasterCommunityPin('${p.id}', this.checked)" />
+                  </div>
+                </td>
+                <td>
+                  <div class="form-check form-switch d-inline-block">
+                    <input class="form-check-input" type="checkbox" ${isFeatured} onchange="toggleMasterCommunityFeature('${p.id}', this.checked)" />
+                  </div>
+                </td>
+                <td>
+                  <div class="form-check form-switch d-inline-block">
+                    <input class="form-check-input" type="checkbox" ${isHidden} onchange="toggleMasterCommunityHide('${p.id}', this.checked)" />
+                  </div>
+                </td>
+                <td>
+                  <button class="btn btn-dark btn-sm border-secondary text-danger" onclick="purgeMasterCommunityPrompt('${p.id}')" title="Purge Prompt"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+      }
+
+      window.toggleMasterCommunityPin = function(id, isChecked) {
+        const list = StorageHelper.get('ps_community');
+        const index = list.findIndex(p => p.id === id);
+        if (index !== -1) {
+          list[index].pinned = isChecked;
+          StorageHelper.set('ps_community', list);
+          StorageHelper.addLog("super@promptstudio.ai", "Master Toggle Pin", "Community", "Success", `Toggled pin status to ${isChecked} for prompt ${list[index].title}`);
+          loadMasterCommunity();
+        }
+      };
+
+      window.toggleMasterCommunityFeature = function(id, isChecked) {
+        const list = StorageHelper.get('ps_community');
+        const index = list.findIndex(p => p.id === id);
+        if (index !== -1) {
+          list[index].featured = isChecked;
+          StorageHelper.set('ps_community', list);
+          StorageHelper.addLog("super@promptstudio.ai", "Master Toggle Feature", "Community", "Success", `Toggled featured status to ${isChecked} for prompt ${list[index].title}`);
+          loadMasterCommunity();
+        }
+      };
+
+      window.toggleMasterCommunityHide = function(id, isChecked) {
+        const list = StorageHelper.get('ps_community');
+        const index = list.findIndex(p => p.id === id);
+        if (index !== -1) {
+          list[index].hidden = isChecked;
+          StorageHelper.set('ps_community', list);
+          StorageHelper.addLog("super@promptstudio.ai", "Master Toggle Hide", "Community", "Success", `Toggled hidden status to ${isChecked} for prompt ${list[index].title}`);
+          loadMasterCommunity();
+        }
+      };
+
+      window.purgeMasterCommunityPrompt = function(id) {
+        if (confirm("Are you absolutely sure you want to permanently delete this prompt from the platform? This action cannot be undone.")) {
+          const list = StorageHelper.get('ps_community');
+          const target = list.find(p => p.id === id);
+          const updated = list.filter(p => p.id !== id);
+          StorageHelper.set('ps_community', updated);
+
+          StorageHelper.addLog("super@promptstudio.ai", "Master Purged Prompt", "Community", "Success", `Permanently purged community prompt ${target ? target.title : id}`);
+          loadMasterCommunity();
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', loadMasterCommunity);
+    </script>
+  </body>
+</html>

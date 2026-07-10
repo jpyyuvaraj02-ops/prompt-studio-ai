@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Studio AI - Admin Dashboard</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Core custom styling -->
+    <link rel="stylesheet" href="/admin/css/admin.css" />
+    <link rel="stylesheet" href="/admin/css/responsive.css" />
+  </head>
+  <body>
+
+    <!-- Sidebar wrapper target -->
+    <div id="admin-sidebar-target"></div>
+
+    <!-- Main Content Panel -->
+    <div class="admin-main-wrapper">
+      
+      <!-- Sticky header bar target -->
+      <div id="admin-header-target" data-title="Dashboard Home"></div>
+
+      <!-- Quick Platform Alerts -->
+      <div class="alert bg-primary bg-opacity-10 text-primary border border-primary border-opacity-10 rounded-4 px-4 py-3 d-flex align-items-center justify-content-between mb-4 animate-fade-in">
+        <div class="d-flex align-items-center gap-2.5 fs-8">
+          <i class="bi bi-shield-fill-check fs-5"></i>
+          <span><b>Admin Node Connected:</b> Standard security keys successfully authenticated on standard sandbox clusters.</span>
+        </div>
+        <span class="badge bg-primary rounded-pill px-2.5 py-1 text-uppercase text-white" style="font-size: 9px; cursor: pointer;" onclick="location.href='./logs.html'">View logs</span>
+      </div>
+
+      <!-- ==========================================
+           TOP PLATFORM STATISTICS (GRID OF 10 CARDS)
+           ========================================== -->
+      <div class="row g-3 mb-4">
+        <!-- 1. Total Users -->
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2.4">
+          <div class="premium-card card-gradient-indigo h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold">Total Users</span>
+                <span class="text-primary fs-5"><i class="bi bi-people-fill"></i></span>
+              </div>
+              <h3 class="fw-extrabold text-dark mb-0">1,240</h3>
+              <span class="text-success fs-9" style="font-size: 11px;"><i class="bi bi-arrow-up-short"></i>+12% this week</span>
+            </div>
+            <!-- Small UI Sparkline chart -->
+            <div class="mini-chart-container mt-2">
+              <div class="mini-chart-bar" style="--chart-height: 40%"></div>
+              <div class="mini-chart-bar" style="--chart-height: 60%"></div>
+              <div class="mini-chart-bar" style="--chart-height: 50%"></div>
+              <div class="mini-chart-bar" style="--chart-height: 80%"></div>
+              <div class="mini-chart-bar" style="--chart-height: 90%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Community Posts -->
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2.4">
+          <div class="premium-card card-gradient-purple h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold">Community Posts</span>
+                <span class="text-purple fs-5"><i class="bi bi-chat-heart-fill" style="color: #a855f7;"></i></span>
+              </div>
+              <h3 class="fw-extrabold text-dark mb-0" id="stat-community-count">4</h3>
+              <span class="text-success fs-9" style="font-size: 11px;"><i class="bi bi-arrow-up-short"></i>Active feeds</span>
+            </div>
+            <div class="mini-chart-container mt-2">
+              <div class="mini-chart-bar" style="--chart-height: 30%; background: #a855f7;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 40%; background: #a855f7;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 70%; background: #a855f7;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 50%; background: #a855f7;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 80%; background: #a855f7;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Marketplace Prompts -->
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2.4">
+          <div class="premium-card card-gradient-emerald h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold">Marketplace Prompts</span>
+                <span class="text-success fs-5"><i class="bi bi-shop"></i></span>
+              </div>
+              <h3 class="fw-extrabold text-dark mb-0" id="stat-marketplace-count">2</h3>
+              <span class="text-success fs-9" style="font-size: 11px;"><i class="bi bi-arrow-up-short"></i>Verified packages</span>
+            </div>
+            <div class="mini-chart-container mt-2">
+              <div class="mini-chart-bar" style="--chart-height: 50%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 30%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 60%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 80%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 90%; background: #10b981;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Pending Approval -->
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2.4">
+          <div class="premium-card card-gradient-amber h-100 d-flex flex-column justify-content-between" style="cursor: pointer;" onclick="location.href='./community.html?filter=pending'">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold">Pending Approvals</span>
+                <span class="text-warning fs-5"><i class="bi bi-hourglass-split"></i></span>
+              </div>
+              <h3 class="fw-extrabold text-dark mb-0" id="stat-pending-count">1</h3>
+              <span class="badge bg-warning text-dark fs-9 rounded px-2 mt-1 py-0.5 animate-pulse" style="font-size: 10px;">Requires Review</span>
+            </div>
+            <div class="mini-chart-container mt-2">
+              <div class="mini-chart-bar" style="--chart-height: 20%; background: #f59e0b;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 50%; background: #f59e0b;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 40%; background: #f59e0b;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 30%; background: #f59e0b;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 10%; background: #f59e0b;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Approved Prompts -->
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2.4">
+          <div class="premium-card card-gradient-emerald h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold">Approved Prompts</span>
+                <span class="text-success fs-5"><i class="bi bi-check-all"></i></span>
+              </div>
+              <h3 class="fw-extrabold text-dark mb-0">512</h3>
+              <span class="text-muted fs-9" style="font-size: 11px;">98.2% total success</span>
+            </div>
+            <div class="mini-chart-container mt-2">
+              <div class="mini-chart-bar" style="--chart-height: 60%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 70%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 80%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 90%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 95%; background: #10b981;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <!-- 6. Rejected Prompts -->
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2.4">
+          <div class="premium-card card-gradient-rose h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold">Rejected Prompts</span>
+                <span class="text-danger fs-5"><i class="bi bi-x-circle-fill"></i></span>
+              </div>
+              <h3 class="fw-extrabold text-dark mb-0">9</h3>
+              <span class="text-muted fs-9" style="font-size: 11px;">1.8% of uploads</span>
+            </div>
+            <div class="mini-chart-container mt-2">
+              <div class="mini-chart-bar" style="--chart-height: 10%; background: #f43f5e;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 20%; background: #f43f5e;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 15%; background: #f43f5e;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 5%; background: #f43f5e;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 8%; background: #f43f5e;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Downloads Count -->
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2.4">
+          <div class="premium-card card-gradient-indigo h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold">Downloads</span>
+                <span class="text-primary fs-5"><i class="bi bi-cloud-arrow-down-fill"></i></span>
+              </div>
+              <h3 class="fw-extrabold text-dark mb-0">8,450</h3>
+              <span class="text-success fs-9" style="font-size: 11px;"><i class="bi bi-arrow-up-short"></i>+34% this month</span>
+            </div>
+            <div class="mini-chart-container mt-2">
+              <div class="mini-chart-bar" style="--chart-height: 40%"></div>
+              <div class="mini-chart-bar" style="--chart-height: 50%"></div>
+              <div class="mini-chart-bar" style="--chart-height: 60%"></div>
+              <div class="mini-chart-bar" style="--chart-height: 80%"></div>
+              <div class="mini-chart-bar" style="--chart-height: 95%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Revenue (Demo) -->
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2.4">
+          <div class="premium-card card-gradient-emerald h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold">Revenue (Demo)</span>
+                <span class="text-success fs-5"><i class="bi bi-currency-dollar" style="color: #10b981;"></i></span>
+              </div>
+              <h3 class="fw-extrabold text-dark mb-0">$12,450</h3>
+              <span class="text-success fs-9" style="font-size: 11px;"><i class="bi bi-arrow-up-short"></i>+21.4% Monthly</span>
+            </div>
+            <div class="mini-chart-container mt-2">
+              <div class="mini-chart-bar" style="--chart-height: 30%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 50%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 60%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 80%; background: #10b981;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 95%; background: #10b981;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Online Users -->
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2.4">
+          <div class="premium-card card-gradient-purple h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold">Online Users</span>
+                <span class="text-purple fs-5"><i class="bi bi-activity" style="color: #a855f7;"></i></span>
+              </div>
+              <h3 class="fw-extrabold text-dark mb-0">84</h3>
+              <span class="text-success fs-9" style="font-size: 11px;"><i class="bi bi-circle-fill me-1" style="font-size: 6px;"></i>Active Now</span>
+            </div>
+            <div class="mini-chart-container mt-2">
+              <div class="mini-chart-bar" style="--chart-height: 80%; background: #a855f7;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 90%; background: #a855f7;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 70%; background: #a855f7;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 85%; background: #a855f7;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 92%; background: #a855f7;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. New Registrations -->
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2.4">
+          <div class="premium-card card-gradient-amber h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold">New Accounts</span>
+                <span class="text-warning fs-5"><i class="bi bi-person-plus-fill"></i></span>
+              </div>
+              <h3 class="fw-extrabold text-dark mb-0">+28</h3>
+              <span class="text-muted fs-9" style="font-size: 11px;">Past 24 hours</span>
+            </div>
+            <div class="mini-chart-container mt-2">
+              <div class="mini-chart-bar" style="--chart-height: 40%; background: #f59e0b;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 60%; background: #f59e0b;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 20%; background: #f59e0b;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 50%; background: #f59e0b;"></div>
+              <div class="mini-chart-bar" style="--chart-height: 70%; background: #f59e0b;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           CHARTS & BROADCASTS PANELS
+           ========================================== -->
+      <div class="row g-4 mb-4">
+        <!-- Daily User Traffic CSS Chart -->
+        <div class="col-12 col-lg-8">
+          <div class="premium-card">
+            <h5 class="fw-bold text-dark mb-3"><i class="bi bi-graph-up text-primary me-2"></i>Daily Active Users (DAU Trend)</h5>
+            <div id="chart-daily-users">
+              <!-- Animated CSS bars injected here by charts.js -->
+              <div class="skeleton-box" style="height: 140px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Broadcasts / Announcements -->
+        <div class="col-12 col-lg-4">
+          <div class="premium-card d-flex flex-column h-100">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 class="fw-bold text-dark mb-0"><i class="bi bi-megaphone-fill text-danger me-2"></i>Active Broadcasts</h5>
+              <button class="btn btn-link p-0 fs-9 text-decoration-none fw-bold" onclick="location.href='./announcements.html'">Manage</button>
+            </div>
+            
+            <div id="dashboard-announcements-list" class="flex-grow-1 overflow-auto" style="max-height: 180px;">
+              <!-- Announcements rendered here dynamically -->
+              <div class="skeleton-box"></div>
+              <div class="skeleton-box"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           SYSTEM AUDITS QUICK VIEW
+           ========================================== -->
+      <div class="row g-4">
+        <!-- Quick Checklist -->
+        <div class="col-12 col-md-4">
+          <div class="premium-card h-100">
+            <h5 class="fw-bold text-dark mb-3"><i class="bi bi-check2-all text-success me-2"></i>System Operations Checklist</h5>
+            <ul class="list-group list-group-flush fs-9">
+              <li class="list-group-item d-flex align-items-center gap-2 px-0 bg-transparent py-2.5">
+                <i class="bi bi-check-circle-fill text-success fs-7"></i>
+                <span class="text-secondary">Community Security Sandbox: <b>Online</b></span>
+              </li>
+              <li class="list-group-item d-flex align-items-center gap-2 px-0 bg-transparent py-2.5">
+                <i class="bi bi-check-circle-fill text-success fs-7"></i>
+                <span class="text-secondary">Local Storage Client cache: <b>Synchronized</b></span>
+              </li>
+              <li class="list-group-item d-flex align-items-center gap-2 px-0 bg-transparent py-2.5">
+                <i class="bi bi-check-circle-fill text-success fs-7"></i>
+                <span class="text-secondary">Vite Multi-page asset router: <b>Compiled</b></span>
+              </li>
+              <li class="list-group-item d-flex align-items-center gap-2 px-0 bg-transparent py-2.5">
+                <i class="bi bi-exclamation-triangle-fill text-warning fs-7 animate-pulse"></i>
+                <span class="text-secondary">Pending approval audit backlog: <b>1 item</b></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Latest activity quick table -->
+        <div class="col-12 col-md-8">
+          <div class="premium-card h-100">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 class="fw-bold text-dark mb-0"><i class="bi bi-clock-history text-secondary me-2"></i>Latest System Audits</h5>
+              <button class="btn btn-outline-secondary btn-sm rounded-pill fs-9 px-3" onclick="location.href='./logs.html'">Full Audit Logs</button>
+            </div>
+            <div class="table-responsive">
+              <table class="table custom-table align-middle fs-9">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>Module</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-audits-body">
+                  <!-- Injected from StorageHelper -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Admin Scripts -->
+    <script src="/admin/js/storage.js" type="module"></script>
+    <script src="/admin/js/admin.js" type="module"></script>
+    <script src="/admin/js/charts.js" type="module"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Render dynamic community & marketplace count in statistics
+        const prompts = StorageHelper.get('ps_community');
+        const items = StorageHelper.get('ps_marketplace');
+        
+        const commCount = prompts.length;
+        const marketCount = items.length;
+        const pendingCount = prompts.filter(p => p.status === 'pending').length + items.filter(i => i.status === 'pending').length;
+
+        const commEl = document.getElementById('stat-community-count');
+        const marketEl = document.getElementById('stat-marketplace-count');
+        const pendingEl = document.getElementById('stat-pending-count');
+
+        if (commEl) commEl.innerText = commCount;
+        if (marketEl) marketEl.innerText = marketCount;
+        if (pendingEl) pendingEl.innerText = pendingCount;
+
+        // Render standard latest audits
+        const auditsBody = document.getElementById('dashboard-audits-body');
+        if (auditsBody) {
+          const logs = StorageHelper.get('ps_audit_logs').slice(0, 3);
+          auditsBody.innerHTML = logs.map(l => {
+            const statusBadge = l.status === 'Success' ? 'badge-soft-success' : 'bg-danger bg-opacity-10 text-danger';
+            return `
+              <tr>
+                <td class="text-muted" style="font-size: 11px;">${l.date}</td>
+                <td class="fw-semibold text-dark">${l.user}</td>
+                <td class="text-secondary">${l.action}</td>
+                <td><span class="badge bg-light text-dark border px-2 py-0.5">${l.module}</span></td>
+                <td><span class="badge ${statusBadge} px-2 py-0.5 rounded">${l.status}</span></td>
+              </tr>
+            `;
+          }).join('');
+        }
+
+        // Render announcements
+        const announcementsList = document.getElementById('dashboard-announcements-list');
+        if (announcementsList) {
+          const announcements = StorageHelper.get('ps_announcements');
+          if (announcements.length === 0) {
+            announcementsList.innerHTML = `<p class="text-muted text-center fs-9 py-4">No active broadcasts published.</p>`;
+          } else {
+            announcementsList.innerHTML = announcements.map(a => {
+              const priorityClass = a.priority === 'Critical' ? 'bg-danger' : (a.priority === 'Important' ? 'bg-warning text-dark' : 'bg-primary');
+              return `
+                <div class="p-2.5 border rounded-3 bg-light mb-2">
+                  <div class="d-flex align-items-center justify-content-between mb-1.5">
+                    <span class="badge ${priorityClass} fs-9 rounded" style="font-size: 9px;">${a.priority}</span>
+                    <span class="text-muted fs-9" style="font-size: 10px;">${a.date}</span>
+                  </div>
+                  <h6 class="fw-bold text-dark fs-9 mb-1">${a.title}</h6>
+                  <p class="text-muted fs-9 mb-0 leading-normal" style="font-size: 11.5px;">${a.description}</p>
+                </div>
+              `;
+            }).join('');
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

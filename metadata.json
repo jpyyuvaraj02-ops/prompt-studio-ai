@@ -1,0 +1,6 @@
+{
+  "name": "Prompt Studio AI",
+  "description": "A premium AI Prompt Engineering platform to generate prompts, Skill.md files, PRDs, folder structures, database schemas, and documentation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
