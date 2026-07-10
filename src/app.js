@@ -51,7 +51,7 @@ const MODELS = [
 // Language String Map
 const STRINGS = {
   en: {
-    desk: "Orchestration Desk",
+    desk: "New Conversation",
     skills: "Skill Center",
     community: "Community Arena",
     marketplace: "Marketplace Store",
@@ -60,7 +60,7 @@ const STRINGS = {
     settings: "Control Settings"
   },
   ta: {
-    desk: "வடிவமைப்பு மையம் (Desk)",
+    desk: "புதிய உரையாடல்",
     skills: "திறன் மையம் (Skills)",
     community: "சமூக அரங்கம் (Community)",
     marketplace: "சந்தை கடை (Marketplace)",
@@ -2158,41 +2158,13 @@ function formatMessage(text) {
   return html;
 }
 
-function QuickAccessCard(icon, title, desc, buttonId) {
-  return `
-    <button type="button" class="quick-access-card hover-scale" id="${buttonId}">
-      <div class="quick-access-card-icon">
-        <i data-lucide="${icon}" style="width: 18px; height: 18px;"></i>
-      </div>
-      <div class="quick-access-card-content text-start">
-        <div class="fw-bold fs-7 text-white mb-1">${title}</div>
-        <p class="fs-8 text-white text-opacity-85 mb-0">${desc}</p>
-      </div>
-      <div class="quick-access-card-button text-white fw-bold fs-8">Explore</div>
-    </button>
-  `;
-}
-
-function QuickAccessBar() {
-  return `
-    <div class="quick-access-bar">
-      ${QuickAccessCard('users', 'Community Arena', 'Connect with AI developers, share prompts and discover ideas.', 'quick-access-community')}
-      ${QuickAccessCard('shopping-bag', 'Marketplace Store', 'Buy and sell premium AI prompts and Skill.md templates.', 'quick-access-marketplace')}
-    </div>
-  `;
-}
-
 function initWorkspaceChat() {
   const messagesArea = document.getElementById('workspace-chat-messages');
   if (!messagesArea) return;
 
-  if (state.chatMessages.length === 0) {
-    state.chatMessages.push({
-      sender: 'ai',
-      text: 'Hi! I am your **Prompt Engineering Orchestrator**. Describe any application or feature, and I\'ll generate extensive development specs, product requirement documents, SQL schemas, and deployment workflows for you instantly.\n\nType `@` in the input below to quick-attach specialized compiler skills!',
-      timestamp: 'System',
-      isWelcome: true
-    });
+  // Migration: clear old chat message state if it contains only the welcome bubble
+  if (state.chatMessages.length === 1 && state.chatMessages[0].isWelcome) {
+    state.chatMessages = [];
     saveState();
   }
 
@@ -2203,171 +2175,118 @@ function renderChatMessages() {
   const messagesArea = document.getElementById('workspace-chat-messages');
   if (!messagesArea) return;
 
-  let html = state.chatMessages.map(msg => {
-    const isUser = msg.sender === 'user';
-    const name = isUser ? 'You' : 'Orchestrator AI';
-    const avatar = isUser 
-      ? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&crop=faces'
-      : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&h=100&fit=crop&crop=faces';
-    
-    return `
-      <div class="chat-bubble ${isUser ? 'chat-bubble-user' : ''}">
-        <img src="${avatar}" class="chat-avatar" alt="${name}">
-        <div class="chat-bubble-content">
-          <div class="chat-bubble-header">
-            <span class="chat-sender-name">${name}</span>
-            <span class="chat-timestamp">${msg.timestamp}</span>
-          </div>
-          <div class="chat-bubble-body">
-            ${formatMessage(msg.text)}
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
+  let html = '';
 
-  // If only welcome message exists, append a quick-starter template list inside the chat!
-  if (state.chatMessages.length === 1) {
-    html += `
-      <div class="mt-4 ms-0 ms-md-5 ps-0 ps-md-3 animate-fade-in-up">
-        ${QuickAccessBar()}
-
-        <!-- Welcome Banner Card -->
-        <div class="custom-card border-0 text-white mb-4 shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);">
-          <div class="floating-shape shape-1 opacity-10" style="width: 150px; height: 150px; filter: blur(40px); top:-20px; right:-20px;"></div>
-          <div class="p-4 relative z-2">
-            <h4 class="fw-bold mb-1 text-white">Welcome back to your Prompt Engineering Cabinet! 👋</h4>
-            <p class="fs-8 text-white text-opacity-90 mb-0">Create, test, and optimize production-grade system prompts and deployment specifications instantly.</p>
-          </div>
+  if (state.chatMessages.length === 0) {
+    // Render clean, centered "New Conversation" landing page
+    html = `
+      <div class="new-conversation-hero text-center py-5 animate-fade-in-up" style="max-width: 720px; margin: 0 auto;">
+        <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-4 shadow-sm" style="width: 56px; height: 56px;">
+          <i data-lucide="sparkles" style="width: 26px; height: 26px;"></i>
         </div>
-        
-        <!-- Dynamic Stats Grid -->
-        <div class="row g-3 mb-4">
-          <div class="col-md-4">
-            <div class="custom-card p-3 d-flex align-items-center gap-3">
-              <div class="rounded-3 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; flex-shrink: 0;">
-                <i data-lucide="file-code" style="width: 20px; height: 20px;"></i>
-              </div>
-              <div>
-                <span class="fs-9 text-muted d-block text-uppercase fw-bold">Compiled Specs</span>
-                <span class="fs-7 fw-bold text-dark d-block" id="stats-compiled-specs">${state.history.length} Blueprints</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="custom-card p-3 d-flex align-items-center gap-3">
-              <div class="rounded-3 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; flex-shrink: 0;">
-                <i data-lucide="cpu" style="width: 20px; height: 20px;"></i>
-              </div>
-              <div>
-                <span class="fs-9 text-muted d-block text-uppercase fw-bold">Active Skills</span>
-                <span class="fs-7 fw-bold text-dark d-block" id="stats-active-skills">${state.skills.length} Specialties</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="custom-card p-3 d-flex align-items-center gap-3">
-              <div class="rounded-3 bg-warning bg-opacity-10 text-warning d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; flex-shrink: 0;">
-                <i data-lucide="download-cloud" style="width: 20px; height: 20px;"></i>
-              </div>
-              <div>
-                <span class="fs-9 text-muted d-block text-uppercase fw-bold">Cabinet Items</span>
-                <span class="fs-7 fw-bold text-dark d-block" id="stats-cabinet-items">${state.cabinet.length} Unlocked</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Suggested Prompts bento-grid -->
-        <p class="fs-8 fw-bold text-uppercase tracking-wider text-secondary mb-3 d-flex align-items-center gap-1.5">
-          <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
-          <span>Popular Starter Blueprints:</span>
+        <h2 class="fw-extrabold text-dark mb-2">New Conversation</h2>
+        <p class="text-secondary mx-auto mb-5 fs-8" style="max-width: 540px; line-height: 1.6;">
+          Describe any application or feature, and I'll generate extensive development specs, product requirement documents, SQL schemas, and deployment workflows for you instantly.
         </p>
-        <div class="row g-3">
-          <div class="col-md-6">
-            <div class="custom-card p-3.5 cursor-pointer h-100 d-flex flex-column justify-content-between quick-start-prompt" data-prompt="Build a responsive Coffee Shop Ordering website with LocalStorage cart calculating totals.">
-              <div>
-                <div class="d-flex align-items-center gap-2 mb-2">
-                  <span class="fs-5">☕</span>
-                  <h6 class="fw-bold mb-0 text-dark fs-7">Coffee Shop Ordering Platform</h6>
+        
+        <div class="starter-prompts-container text-start">
+          <p class="fs-9 text-muted text-uppercase tracking-wider fw-bold mb-3.5 d-flex align-items-center gap-1.5 justify-content-center justify-content-md-start">
+            <i data-lucide="sparkles" style="width: 14px; height: 14px;" class="text-primary"></i>
+            <span>Popular Starter Blueprints:</span>
+          </p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="custom-card p-3.5 cursor-pointer h-100 d-flex flex-column justify-content-between quick-start-prompt hover-scale" data-prompt="Build a responsive Coffee Shop Ordering website with LocalStorage cart calculating totals.">
+                <div>
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="fs-6">☕</span>
+                    <h6 class="fw-bold mb-0 text-dark fs-8">Coffee Shop Ordering Platform</h6>
+                  </div>
+                  <p class="fs-9 text-secondary mb-0 leading-relaxed">Interactive web ordering app featuring instant totals, LocalStorage persistence, and beautiful animations.</p>
                 </div>
-                <p class="fs-9 text-secondary mb-0 leading-relaxed">Interactive web ordering app featuring instant totals, LocalStorage persistence, and beautiful animations.</p>
-              </div>
-              <div class="mt-3.5 d-flex align-items-center gap-1 text-primary fw-bold fs-9">
-                <span>Deploy Spec</span>
-                <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                <div class="mt-3.5 d-flex align-items-center gap-1 text-primary fw-bold fs-9">
+                  <span>Deploy Spec</span>
+                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="custom-card p-3.5 cursor-pointer h-100 d-flex flex-column justify-content-between quick-start-prompt" data-prompt="Build a SaaS Pricing Landing Page with custom pricing tier selectors, FAQ accordion, and dark-theme style.">
-              <div>
-                <div class="d-flex align-items-center gap-2 mb-2">
-                  <span class="fs-5">🚀</span>
-                  <h6 class="fw-bold mb-0 text-dark fs-7">SaaS Pricing Landing Page</h6>
+            <div class="col-md-6">
+              <div class="custom-card p-3.5 cursor-pointer h-100 d-flex flex-column justify-content-between quick-start-prompt hover-scale" data-prompt="Build a SaaS Pricing Landing Page with custom pricing tier selectors, FAQ accordion, and dark-theme style.">
+                <div>
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="fs-6">🚀</span>
+                    <h6 class="fw-bold mb-0 text-dark fs-8">SaaS Pricing Landing Page</h6>
+                  </div>
+                  <p class="fs-9 text-secondary mb-0 leading-relaxed">Modern web pricing card structures featuring custom tier sliders, responsive FAQ accordion panels, and Obsidian theme.</p>
                 </div>
-                <p class="fs-9 text-secondary mb-0 leading-relaxed">Modern web pricing card structures featuring custom tier sliders, responsive FAQ accordion panels, and Obsidian theme.</p>
-              </div>
-              <div class="mt-3.5 d-flex align-items-center gap-1 text-primary fw-bold fs-9">
-                <span>Deploy Spec</span>
-                <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                <div class="mt-3.5 d-flex align-items-center gap-1 text-primary fw-bold fs-9">
+                  <span>Deploy Spec</span>
+                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="custom-card p-3.5 cursor-pointer h-100 d-flex flex-column justify-content-between quick-start-prompt" data-prompt="Build an interactive Developer Portfolio with bento-grid layouts, dark theme overrides, and a working Contact form.">
-              <div>
-                <div class="d-flex align-items-center gap-2 mb-2">
-                  <span class="fs-5">💼</span>
-                  <h6 class="fw-bold mb-0 text-dark fs-7">Modern Developer Portfolio</h6>
+            <div class="col-md-6">
+              <div class="custom-card p-3.5 cursor-pointer h-100 d-flex flex-column justify-content-between quick-start-prompt hover-scale" data-prompt="Build an interactive Developer Portfolio with bento-grid layouts, dark theme overrides, and a working Contact form.">
+                <div>
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="fs-6">💼</span>
+                    <h6 class="fw-bold mb-0 text-dark fs-8">Modern Developer Portfolio</h6>
+                  </div>
+                  <p class="fs-9 text-secondary mb-0 leading-relaxed">Highly responsive bento-grid portfolio layouts with smooth floating-glowing background visual highlights.</p>
                 </div>
-                <p class="fs-9 text-secondary mb-0 leading-relaxed">Highly responsive bento-grid portfolio layouts with smooth floating-glowing background visual highlights.</p>
-              </div>
-              <div class="mt-3.5 d-flex align-items-center gap-1 text-primary fw-bold fs-9">
-                <span>Deploy Spec</span>
-                <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                <div class="mt-3.5 d-flex align-items-center gap-1 text-primary fw-bold fs-9">
+                  <span>Deploy Spec</span>
+                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="custom-card p-3.5 cursor-pointer h-100 d-flex flex-column justify-content-between quick-start-prompt" data-prompt="Build an AI Resume Analyzer with resume score metrics, keyword checklist, and a secure mock file-uploader feedback panel.">
-              <div>
-                <div class="d-flex align-items-center gap-2 mb-2">
-                  <span class="fs-5">📄</span>
-                  <h6 class="fw-bold mb-0 text-dark fs-7">AI Resume Analyzer Console</h6>
+            <div class="col-md-6">
+              <div class="custom-card p-3.5 cursor-pointer h-100 d-flex flex-column justify-content-between quick-start-prompt hover-scale" data-prompt="Build an AI Resume Analyzer with resume score metrics, keyword checklist, and a secure mock file-uploader feedback panel.">
+                <div>
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="fs-6">📄</span>
+                    <h6 class="fw-bold mb-0 text-dark fs-8">AI Resume Analyzer Console</h6>
+                  </div>
+                  <p class="fs-9 text-secondary mb-0 leading-relaxed">System dashboard with scoring algorithms, drag-and-drop resume upload mock containers, and action feedback checklist.</p>
                 </div>
-                <p class="fs-9 text-secondary mb-0 leading-relaxed">System dashboard with scoring algorithms, drag-and-drop resume upload mock containers, and action feedback checklist.</p>
-              </div>
-              <div class="mt-3.5 d-flex align-items-center gap-1 text-primary fw-bold fs-9">
-                <span>Deploy Spec</span>
-                <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                <div class="mt-3.5 d-flex align-items-center gap-1 text-primary fw-bold fs-9">
+                  <span>Deploy Spec</span>
+                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     `;
+  } else {
+    // Render the chat bubbles
+    html = state.chatMessages.map(msg => {
+      const isUser = msg.sender === 'user';
+      const name = isUser ? 'You' : 'Orchestrator AI';
+      const avatar = isUser 
+        ? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&crop=faces'
+        : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&h=100&fit=crop&crop=faces';
+      
+      return `
+        <div class="chat-bubble ${isUser ? 'chat-bubble-user' : ''}">
+          <img src="${avatar}" class="chat-avatar" alt="${name}">
+          <div class="chat-bubble-content">
+            <div class="chat-bubble-header">
+              <span class="chat-sender-name">${name}</span>
+              <span class="chat-timestamp">${msg.timestamp}</span>
+            </div>
+            <div class="chat-bubble-body">
+              ${formatMessage(msg.text)}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
   messagesArea.innerHTML = html;
   messagesArea.scrollTop = messagesArea.scrollHeight;
-
-  const communityQuickAccess = messagesArea.querySelector('#quick-access-community');
-  const marketplaceQuickAccess = messagesArea.querySelector('#quick-access-marketplace');
-
-  if (communityQuickAccess) {
-    communityQuickAccess.addEventListener('click', () => {
-      switchView('community');
-      showToast('Opened Community Arena.');
-    });
-  }
-
-  if (marketplaceQuickAccess) {
-    marketplaceQuickAccess.addEventListener('click', () => {
-      switchView('marketplace');
-      showToast('Opened Marketplace Store.');
-    });
-  }
 
   // Attach quick-start listeners
   messagesArea.querySelectorAll('.quick-start-prompt').forEach(btn => {
