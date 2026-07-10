@@ -127,7 +127,7 @@ function injectAdminHeader() {
           <i class="bi bi-list"></i>
         </button>
         <div>
-          <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold mb-0.5 d-block" style="font-size: 0.7rem;">Orchestration Desk</span>
+          <span class="text-muted fs-9 text-uppercase tracking-wider fw-bold mb-0.5 d-block" style="font-size: 0.7rem;">New Conversation</span>
           <h4 class="mb-0 fw-extrabold text-dark fs-5">${pageTitle}</h4>
         </div>
       </div>
